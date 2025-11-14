@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA + Full-Stack Plan - TWSS</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --background: #121212; --surface: #1E1E1E; --primary: #FF7043; --text-light: #E0E0E0; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--background); color: var(--text-light); margin: 0; padding: 40px; text-align: center; }
+        .container { max-width: 800px; margin: 0 auto; background-color: var(--surface); padding: 40px; border-radius: 15px; border: 1px solid var(--primary); }
+        h1 { color: var(--primary); font-size: 2.5rem; margin-bottom: 20px; }
+        p { font-size: 1.2rem; margin-bottom: 30px; }
+        a { color: var(--primary); }
+        #loading-message { font-size: 1.5rem; }
+        #content { display: none; text-align: left; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="loading-message"><h1>Verifying Access...</h1></div>
+        <div id="content">
+            <h1>Welcome to the DSA + Full-Stack Plan</h1>
+            <p>Thank you for your purchase! Here is your exclusive content, roadmap, and notes.</p>
+            <h3>Your Roadmap:</h3>
+            <ul>
+                <li>Month 1: DSA (Arrays, Stacks, Queues)</li>
+                <li>Month 2: HTML, CSS, JavaScript</li>
+                <li>Month 3: React.js</li>
+                <li>Month 4: Node.js & Express</li>
+                <!-- etc. -->
+            </ul>
+            <p style="text-align: center; margin-top: 30px;"><a href="index.html">Back to Store</a></p>
+        </div>
+    </div>
+    <script type="module">
+        const { createClient } = supabase;
+        // Use the working Supabase key from your index (1).html file
+        const supabaseClient = createClient('https://fzwvxesrtdilljgrntpw.supabase.co', 'eyJhbGciOiJIyDI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6d3Z4ZXNydGRpbGxqZ3JudHB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4NzU2NzMsImV4cCI6MjA2NjQ1MTY3M30.YnxjUtFawuumihyVGuk8e-o6iE9OkDf-MX1aKRTqA5U');
+        const COURSE_NAME = "DSA + Full-Stack Plan";
+        (async function checkAccess() {
+            const loadingMessage = document.getElementById('loading-message');
+            const content = document.getElementById('content');
+            const userEmail = localStorage.getItem("userEmail");
+            const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+            if (!isLoggedIn || !userEmail) {
+                alert("Access Denied. Please log in to view this content.");
+                window.location.href = "index.html";
+                return;
+            }
+            try {
+                const { data: user, error } = await supabaseClient.from('users_login').select('purchased_courses').eq('email', userEmail).single();
+                if (error || !user) { throw new Error("Could not find user record."); }
+                const purchasedCourses = user.purchased_courses || [];
+                if (purchasedCourses.includes(COURSE_NAME)) {
+                    loadingMessage.style.display = "none";
+                    content.style.display = "block";
+                } else {
+                    alert("Access Denied. You have not purchased this course.");
+                    window.location.href = "index.html";
+                }
+            } catch (err) {
+                alert("An error occurred. Please log in again.");
+                window.location.href = "index.html";
+            }
+        })();
+    </script>
+</body>
+</html>
