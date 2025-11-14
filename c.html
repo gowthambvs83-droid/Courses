@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C Language Notes - TWSS</title>
+    <!-- Supabase SDK (MUST be in HEAD) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -43,14 +44,19 @@ int main() {
         </div>
     </div>
 
-    <script type="module">
+    <!-- 
+      FIX: Initialize Supabase client in its own standard script tag.
+    -->
+    <script>
         const { createClient } = supabase;
-        // Use the working Supabase key from your index (1).html file
         const supabaseClient = createClient(
             'https://fzwvxesrtdilljgrntpw.supabase.co',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6d3Z4ZXNydGRpbGxqZ3JudHB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4NzU2NzMsImV4cCI6MjA2NjQ1MTY3M30.YnxjUtFawuumihyVGuk8e-o6iE9OkDf-MX1aKRTqA5U'
+            'eyJhbGciOiJIZDI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6d3Z4ZXNydGRpbGxqZ3JudHB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4NzU2NzMsImV4cCI6MjA2NjQ1MTY3M30.YnxjUtFawuumihyVGuk8e-o6iE9OkDf-MX1aKRTqA5U'
         );
+    </script>
 
+    <!-- Main check-access Logic (as a module) -->
+    <script type="module">
         const COURSE_NAME = "C Language Notes"; // This must match the product name in index.html
 
         (async function checkAccess() {
@@ -67,8 +73,9 @@ int main() {
             }
 
             try {
+                // supabaseClient is now available from the global script
                 const { data: user, error } = await supabaseClient
-                    .from('users_login') // Checks the same table as index.html
+                    .from('users_login')
                     .select('purchased_courses')
                     .eq('email', userEmail)
                     .single();
