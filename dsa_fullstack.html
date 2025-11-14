@@ -23,21 +23,15 @@
         <div id="content">
             <h1>Welcome to the DSA + Full-Stack Plan</h1>
             <p>Thank you for your purchase! Here is your exclusive content, roadmap, and notes.</p>
-            <h3>Your Roadmap:</h3>
-            <ul>
-                <li>Month 1: DSA (Arrays, Stacks, Queues)</li>
-                <li>Month 2: HTML, CSS, JavaScript</li>
-                <li>Month 3: React.js</li>
-                <li>Month 4: Node.js & Express</li>
-                <!-- etc. -->
-            </ul>
+            <!-- Add your content here -->
             <p style="text-align: center; margin-top: 30px;"><a href="index.html">Back to Store</a></p>
         </div>
     </div>
-    <script type="module">
+    <script>
         const { createClient } = supabase;
-        // Use the working Supabase key from your index (1).html file
-        const supabaseClient = createClient('https://fzwvxesrtdilljgrntpw.supabase.co', 'eyJhbGciOiJIyDI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6d3Z4ZXNydGRpbGxqZ3JudHB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4NzU2NzMsImV4cCI6MjA2NjQ1MTY3M30.YnxjUtFawuumihyVGuk8e-o6iE9OkDf-MX1aKRTqA5U');
+        const supabaseClient = createClient('https://fzwvxesrtdilljgrntpw.supabase.co', 'eyJhbGciOiJIZDI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6d3Z4ZXNydGRpbGxqZ3JudHB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4NzU2NzMsImV4cCI6MjA2NjQ1MTY3M30.YnxjUtFawuumihyVGuk8e-o6iE9OkDf-MX1aKRTqA5U');
+    </script>
+    <script type="module">
         const COURSE_NAME = "DSA + Full-Stack Plan";
         (async function checkAccess() {
             const loadingMessage = document.getElementById('loading-message');
