@@ -12,15 +12,14 @@
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
     <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
-    <!-- Supabase SDK (MUST be in HEAD) -->
+    <!-- Supabase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <!-- =================================================================
     SECTION 1: CSS STYLING (MERGED)
     ================================================================= -->
     <style>
-        /* ... (All CSS styles remain exactly the same as before) ... */
+        /* Professional Dark Blue/Orange Accent Palette */
         :root {
             --background: #121212;
             --surface: #1E1E1E;
@@ -1003,7 +1002,7 @@
 
     <header class="header">
         <div class="container header-container">
-            <a href="#home" class="logo">
+            <a href="#home" class="logo" id="logoLink">
                 <i class="fas fa-code"></i>
                 <h1>TW<span>SS</span></h1>
             </a>
@@ -1212,33 +1211,29 @@
             <div class="copyright"><p>&copy; 2025 TWSS. All Rights Reserved. | Crafted with <i class="fas fa-heart" style="color: var(--primary);"></i></p></div>
         </div>
     </footer>
-
     <!-- Razorpay's script -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     
     <!-- =================================================================
-    SECTION 2: JAVASCRIPT LOGIC (FIXED)
+    SECTION 2: JAVASCRIPT LOGIC (MERGED & FIXED)
     ================================================================= -->
-
-    <!-- 
-      FIX: Initialize Supabase client in its own standard script tag.
-      This ensures `supabaseClient` is created in the global scope 
-      BEFORE the module script below tries to use it.
-    -->
-    <script>
+    <script type="module">
+        // =================================================================
+        // SUPABASE & AUTH CONFIG (from Auth File)
+        // =================================================================
         const { createClient } = supabase;
+        
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // !! IMPORTANT FIX !!
+        // The API key from your file ('eyJhbGciOiJ...') was correct. 
+        // I am using the one you confirmed was working.
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         const supabaseClient = createClient(
             'https://fzwvxesrtdilljgrntpw.supabase.co',
-            'eyJhbGciOiJIZDI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6d3Z4ZXNydGRpbGxqZ3JudHB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4NzU2NzMsImV4cCI6MjA2NjQ1MTY3M30.YnxjUtFawuumihyVGuk8e-o6iE9OkDf-MX1aKRTqA5U'
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6d3Z4ZXNydGRpbGxqZ3JudHB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4NzU2NzMsImV4cCI6MjA2NjQ1MTY3M30.YnxjUtFawuumihyVGuk8e-o6iE9OkDf-MX1aKRTqA5U'
         );
-    </script>
 
-    <!-- Main Application Logic (as a module) -->
-    <script type="module">
-        
-        // =================================================================
-        // AUTH CONFIG (EmailJS)
-        // =================================================================
+        // Initialize EmailJS
         const EMAILJS_PUBLIC_KEY = "Kvw3qwiz3bt3Xutlf";
         const EMAILJS_SERVICE_ID = "service_o3hfoip";
         const EMAILJS_TEMPLATE_ID = "template_0lscxdn";
@@ -1258,13 +1253,14 @@
         let resetEmail = '';
 
         // =================================================================
-        // E-COMMERCE CONFIG
+        // E-COMMERCE CONFIG (from E-com File)
         // =================================================================
         const RAZORPAY_KEY_ID = "rzp_live_iwzig23hBqUD90";
         let gatewayActive = false;
         let cart = [];
         
-        // Products array
+        // --- MODIFIED PRODUCTS ARRAY ---
+        // Type is 'course_access' and we added 'access_url'
         const products = [
             { id: "c_notes", name: "C Language Notes", price: 900, type: "course_access", access_url: "c.html" },
             { id: "cpp_notes", name: "C++ Language Notes", price: 900, type: "course_access", access_url: "cpp.html" },
@@ -1277,7 +1273,7 @@
             { id: "college_plan", name: "4 Years College Plan", price: 24900, type: "course_access", access_url: "college_plan.html" },
         ];
         
-        const validCoupon = { code: "SAVE1", discount: 800 }; 
+        const validCoupon = { code: "SAVE1", discount: 800 }; // 800 paisa = ₹8 discount
         const ownerCoupon = "OWNERFREE";
 
         // =================================================================
@@ -1318,21 +1314,20 @@
         // INITIALIZATION
         // =================================================================
         document.addEventListener('DOMContentLoaded', async function() {
-            // supabaseClient is now available from the global script
             await checkAuthStatus();
             initializeEcomEventListeners();
             initializeMobileMenu();
         });
 
         // =================================================================
-        // AUTHENTICATION LOGIC
+        // AUTHENTICATION LOGIC (from Auth File)
         // =================================================================
         
         async function checkAuthStatus() {
             const userEmail = localStorage.getItem("userEmail");
             if (localStorage.getItem("loggedIn") === "true" && userEmail) {
                 const { data: user, error } = await supabaseClient
-                    .from('users_login')
+                    .from('users_login') // Using the table from your auth file
                     .select('*')
                     .eq('email', userEmail)
                     .single();
@@ -1344,13 +1339,14 @@
                     console.log('User session restored.');
                 } else {
                     console.error('Error fetching user on reload:', error);
-                    logout(); 
+                    logout(); // Force logout if user not found
                 }
             } else {
                 updateUIForUnauthenticatedUser();
             }
         }
         
+        // Make these functions global so inline onclicks work
         window.openAuthModal = function(mode = 'login') {
             authModal.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1767,7 +1763,8 @@
             const googleSignInButton = document.getElementById("googleSignInButton");
             if (googleSignInButton && window.google) {
                 google.accounts.id.initialize({
-                    client_id: "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com", // <-- REPLACE THIS
+                    // !! IMPORTANT: REPLACE THIS WITH YOUR OWN GOOGLE CLIENT ID !!
+                    client_id: "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com", 
                     callback: handleCredentialResponse
                 });
                 
@@ -1797,7 +1794,7 @@
                     .from('users_login')
                     .select('*')
                     .eq('email', email)
-                    .single(); 
+                    .single(); // Use .single()
                 
                 if (fetchError && fetchError.code !== 'PGRST116') { // PGRST116 = no rows found
                     console.error('Error checking user:', fetchError);
@@ -1883,7 +1880,7 @@
                     .from('users_login')
                     .select('*')
                     .eq('email', email)
-                    .eq('password', password); 
+                    .eq('password', password); // Note: Storing plain text passwords is NOT secure.
                     
                 if (error) {
                     throw error;
@@ -2070,7 +2067,7 @@
         }
 
         // =================================================================
-        // E-COMMERCE LOGIC
+        // E-COMMERCE LOGIC (from E-com File)
         // =================================================================
 
         function initializeEcomEventListeners() {
@@ -2092,6 +2089,12 @@
                     profileMenu.classList.remove('active');
                 }
             }
+
+            // *** FIX: Added logo click listener from your original file ***
+            document.getElementById('logoLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
             
             // Cart Icon
             cartIconBtn.addEventListener('click', () => {
@@ -2147,7 +2150,7 @@
                 // Pre-fill user details
                 checkoutNameInput.value = currentUser.name || '';
                 checkoutEmailInput.value = currentUser.email || '';
-                checkoutEmailInput.disabled = true; 
+                checkoutEmailInput.disabled = true; // Don't let them change the logged-in email
             });
 
             // Checkout Form Submission
@@ -2165,6 +2168,7 @@
             messageModal.style.display = "block";
         }
 
+        // --- MODIFIED Success Modal ---
         function showPurchaseSuccessModal(product) {
             purchaseSuccessModal.style.display = "block";
             purchaseSuccessModal.querySelector('.modal-content').className = 'modal-content download-modal success';
@@ -2212,6 +2216,7 @@
         }
 
         async function handlePayment() {
+            // User must be logged in to get here
             const name = checkoutNameInput.value.trim();
             const email = checkoutEmailInput.value.trim();
             const couponCode = couponInput.value.trim().toUpperCase();
@@ -2235,13 +2240,13 @@
             } else if (couponCode !== "") {
                 couponStatusEl.style.display = 'block';
                 couponStatusEl.innerText = 'Invalid coupon code.';
-                return; 
+                return; // Stop payment
             } else {
                 couponStatusEl.style.display = 'none';
             }
             
             const purchasedItems = cart.map(item => item.name);
-            const firstPurchasedItem = cart[0]; 
+            const firstPurchasedItem = cart[0]; // For the success modal
 
             const options = {
                 key: RAZORPAY_KEY_ID,
@@ -2255,6 +2260,8 @@
                 },
                 handler: async function (response) {
                     try {
+                        // --- MODIFIED DATABASE LOGIC ---
+                        // We update the user who is CURRENTLY logged in
                         
                         // 1. Get existing purchased courses
                         const existingContent = currentUser.purchased_courses || [];
@@ -2307,6 +2314,50 @@
             rzp.open();
         }
 
+    </script>
+    
+    <!-- FIX: Restoring the anti-dev-tool scripts from your original index (1).html -->
+    <script>
+    document.onkeydown = function(e) {
+        if (
+            e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S') ||
+            e.key === 'F12' ||
+            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i'))
+        ) {
+            return false;
+        }
+    };
+    document.addEventListener('contextmenu', event => {
+        event.preventDefault();
+    });
+    </script>
+    <script>
+    // Disable right-click menu
+    document.addEventListener("contextmenu", function(e) {
+      e.preventDefault();
+    }, false);
+    
+    // Disable certain key combinations
+    document.addEventListener("keydown", function(e) {
+      // F12
+      if (e.keyCode === 123) {
+        e.preventDefault();
+      }
+      // Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+U
+      if ((e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || 
+          (e.ctrlKey && e.keyCode === 85)) {
+        e.preventDefault();
+      }
+      // Ctrl+C
+      if (e.ctrlKey && e.keyCode === 67) {
+        e.preventDefault();
+      }
+    }, false);
+    
+    // Optional: Block copying text
+    document.addEventListener("copy", function(e) {
+      e.preventDefault();
+    });
     </script>
 </body>
 </html>
