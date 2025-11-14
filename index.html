@@ -12,14 +12,15 @@
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
     <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <!-- Supabase SDK -->
+    
+    <!-- Supabase SDK (MUST be in HEAD) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <!-- =================================================================
-    SECTION 1: CSS STYLING (E-COMMERCE UI)
+    SECTION 1: CSS STYLING (MERGED)
     ================================================================= -->
     <style>
-        /* Professional Dark Blue/Orange Accent Palette */
+        /* ... (All CSS styles remain exactly the same as before) ... */
         :root {
             --background: #121212;
             --surface: #1E1E1E;
@@ -51,7 +52,7 @@
             padding: 0 20px; 
         }
         
-        /* Header styles (from Auth File, adapted for E-com) */
+        /* Header styles (from Auth File) */
         .header {
             background: rgba(255, 255, 255, 0.95);
             color: var(--text-dark);
@@ -1211,35 +1212,45 @@
             <div class="copyright"><p>&copy; 2025 TWSS. All Rights Reserved. | Crafted with <i class="fas fa-heart" style="color: var(--primary);"></i></p></div>
         </div>
     </footer>
+
     <!-- Razorpay's script -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     
     <!-- =================================================================
-    SECTION 2: JAVASCRIPT LOGIC (MERGED)
+    SECTION 2: JAVASCRIPT LOGIC (FIXED)
     ================================================================= -->
-    <script type="module">
-        // =================================================================
-        // SUPABASE & AUTH CONFIG (From User's working file)
-        // =================================================================
+
+    <!-- 
+      FIX: Initialize Supabase client in its own standard script tag.
+      This ensures `supabaseClient` is created in the global scope 
+      BEFORE the module script below tries to use it.
+    -->
+    <script>
         const { createClient } = supabase;
         const supabaseClient = createClient(
             'https://fzwvxesrtdilljgrntpw.supabase.co',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6d3Z4ZXNydGRpbGxqZ3JudHB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4NzU2NzMsImV4cCI6MjA2NjQ1MTY3M30.YnxjUtFawuumihyVGuk8e-o6iE9OkDf-MX1aKRTqA5U'
+            'eyJhbGciOiJIZDI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6d3Z4ZXNydGRpbGxqZ3JudHB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4NzU2NzMsImV4cCI6MjA2NjQ1MTY3M30.YnxjUtFawuumihyVGuk8e-o6iE9OkDf-MX1aKRTqA5U'
         );
+    </script>
 
-        // Initialize EmailJS (From User's working file)
+    <!-- Main Application Logic (as a module) -->
+    <script type="module">
+        
+        // =================================================================
+        // AUTH CONFIG (EmailJS)
+        // =================================================================
         const EMAILJS_PUBLIC_KEY = "Kvw3qwiz3bt3Xutlf";
         const EMAILJS_SERVICE_ID = "service_o3hfoip";
         const EMAILJS_TEMPLATE_ID = "template_0lscxdn";
         emailjs.init(EMAILJS_PUBLIC_KEY);
 
-        // Global variables for OTP (From User's working file)
+        // Global variables for OTP
         let currentOtp = null;
         let otpExpiry = 0;
         let resendTimer = null;
         const RESEND_TIMER_SECONDS = 60;
 
-        // Global variables for authentication (From User's working file)
+        // Global variables for authentication
         let currentUser = null;
         let isAuthenticated = false;
         let signupEmail = '';
@@ -1247,14 +1258,13 @@
         let resetEmail = '';
 
         // =================================================================
-        // E-COMMERCE CONFIG (from E-com File)
+        // E-COMMERCE CONFIG
         // =================================================================
         const RAZORPAY_KEY_ID = "rzp_live_iwzig23hBqUD90";
         let gatewayActive = false;
         let cart = [];
         
-        // --- MODIFIED PRODUCTS ARRAY ---
-        // Type is 'course_access' and we added 'access_url'
+        // Products array
         const products = [
             { id: "c_notes", name: "C Language Notes", price: 900, type: "course_access", access_url: "c.html" },
             { id: "cpp_notes", name: "C++ Language Notes", price: 900, type: "course_access", access_url: "cpp.html" },
@@ -1267,11 +1277,11 @@
             { id: "college_plan", name: "4 Years College Plan", price: 24900, type: "course_access", access_url: "college_plan.html" },
         ];
         
-        const validCoupon = { code: "SAVE1", discount: 800 }; // 800 paisa = ₹8 discount
+        const validCoupon = { code: "SAVE1", discount: 800 }; 
         const ownerCoupon = "OWNERFREE";
 
         // =================================================================
-        // DOM ELEMENT SELECTORS (MERGED)
+        // DOM ELEMENT SELECTORS
         // =================================================================
         // E-com Modals
         const messageModal = document.getElementById("messageModal");
@@ -1308,20 +1318,21 @@
         // INITIALIZATION
         // =================================================================
         document.addEventListener('DOMContentLoaded', async function() {
-            await checkAuthStatus(); // From User's File
-            initializeEcomEventListeners(); // From E-com File
-            initializeMobileMenu(); // From User's File
+            // supabaseClient is now available from the global script
+            await checkAuthStatus();
+            initializeEcomEventListeners();
+            initializeMobileMenu();
         });
 
         // =================================================================
-        // AUTHENTICATION LOGIC (From User's working file)
+        // AUTHENTICATION LOGIC
         // =================================================================
         
         async function checkAuthStatus() {
             const userEmail = localStorage.getItem("userEmail");
             if (localStorage.getItem("loggedIn") === "true" && userEmail) {
                 const { data: user, error } = await supabaseClient
-                    .from('users_login') // Using the table from your auth file
+                    .from('users_login')
                     .select('*')
                     .eq('email', userEmail)
                     .single();
@@ -1333,14 +1344,13 @@
                     console.log('User session restored.');
                 } else {
                     console.error('Error fetching user on reload:', error);
-                    logout(); // Force logout if user not found
+                    logout(); 
                 }
             } else {
                 updateUIForUnauthenticatedUser();
             }
         }
         
-        // Make these functions global so inline onclicks work
         window.openAuthModal = function(mode = 'login') {
             authModal.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1722,7 +1732,7 @@
                     .from('users_login')
                     .insert([{
                         email: signupEmail,
-                        password: signupPassword, // Storing plain text password as in your file
+                        password: signupPassword,
                         name: extractNameFromEmail(signupEmail),
                         purchased_courses: [], // Initialize with empty array
                         created_at: new Date()
@@ -1757,7 +1767,7 @@
             const googleSignInButton = document.getElementById("googleSignInButton");
             if (googleSignInButton && window.google) {
                 google.accounts.id.initialize({
-                    client_id: "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com", // <-- From User's file (remember to replace this)
+                    client_id: "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com", // <-- REPLACE THIS
                     callback: handleCredentialResponse
                 });
                 
@@ -1787,7 +1797,7 @@
                     .from('users_login')
                     .select('*')
                     .eq('email', email)
-                    .single(); // Use .single()
+                    .single(); 
                 
                 if (fetchError && fetchError.code !== 'PGRST116') { // PGRST116 = no rows found
                     console.error('Error checking user:', fetchError);
@@ -1873,7 +1883,7 @@
                     .from('users_login')
                     .select('*')
                     .eq('email', email)
-                    .eq('password', password); // Note: Storing plain text passwords is NOT secure.
+                    .eq('password', password); 
                     
                 if (error) {
                     throw error;
@@ -2060,7 +2070,7 @@
         }
 
         // =================================================================
-        // E-COMMERCE LOGIC (from E-com File)
+        // E-COMMERCE LOGIC
         // =================================================================
 
         function initializeEcomEventListeners() {
@@ -2137,7 +2147,7 @@
                 // Pre-fill user details
                 checkoutNameInput.value = currentUser.name || '';
                 checkoutEmailInput.value = currentUser.email || '';
-                checkoutEmailInput.disabled = true; // Don't let them change the logged-in email
+                checkoutEmailInput.disabled = true; 
             });
 
             // Checkout Form Submission
@@ -2155,7 +2165,6 @@
             messageModal.style.display = "block";
         }
 
-        // --- MODIFIED Success Modal ---
         function showPurchaseSuccessModal(product) {
             purchaseSuccessModal.style.display = "block";
             purchaseSuccessModal.querySelector('.modal-content').className = 'modal-content download-modal success';
@@ -2203,7 +2212,6 @@
         }
 
         async function handlePayment() {
-            // User must be logged in to get here
             const name = checkoutNameInput.value.trim();
             const email = checkoutEmailInput.value.trim();
             const couponCode = couponInput.value.trim().toUpperCase();
@@ -2227,13 +2235,13 @@
             } else if (couponCode !== "") {
                 couponStatusEl.style.display = 'block';
                 couponStatusEl.innerText = 'Invalid coupon code.';
-                return; // Stop payment
+                return; 
             } else {
                 couponStatusEl.style.display = 'none';
             }
             
             const purchasedItems = cart.map(item => item.name);
-            const firstPurchasedItem = cart[0]; // For the success modal
+            const firstPurchasedItem = cart[0]; 
 
             const options = {
                 key: RAZORPAY_KEY_ID,
@@ -2247,8 +2255,6 @@
                 },
                 handler: async function (response) {
                     try {
-                        // --- MODIFIED DATABASE LOGIC ---
-                        // We update the user who is CURRENTLY logged in
                         
                         // 1. Get existing purchased courses
                         const existingContent = currentUser.purchased_courses || [];
@@ -2301,46 +2307,6 @@
             rzp.open();
         }
 
-    </script>
-    
-    <!-- Anti-Copy/DevTools Scripts (From User's working file) -->
-    <script>
-    document.onkeydown = function(e) {
-        if (
-            e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S') ||
-            e.key === 'F12' ||
-            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i'))
-        ) {
-            return false;
-        }
-    };
-    document.addEventListener('contextmenu', event => {
-        event.preventDefault();
-    });
-    </script>
-    <script>
-    // Disable right-click menu
-    document.addEventListener("contextmenu", function(e) {
-      e.preventDefault();
-    }, false);
-
-    // Disable certain key combinations
-    document.addEventListener("keydown", function(e) {
-      // F12
-      if (e.keyCode === 123) {
-        e.preventDefault();
-      }
-      // Ctrl+Shift+I or Ctrl+Shift+J or Ctrl+U
-      if ((e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || 
-          (e.ctrlKey && e.keyCode === 85)) {
-        e.preventDefault();
-      }
-      // Ctrl+C
-      if (e.ctrlKey && e.keyCode === 67) {
-        // You might want to be careful with this one as it blocks normal copy-paste
-        // e.preventDefault(); 
-      }
-    }, false);
     </script>
 </body>
 </html>
