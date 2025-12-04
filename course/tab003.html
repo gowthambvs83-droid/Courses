@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Study & C Compiler</title>
+    <title>Java Study & Compiler</title>
     <style>
         /* Reset margins to use full screen */
         body, html {
@@ -25,10 +24,10 @@
 
         /* --- ADJUST RATIO HERE --- */
         .pdf-section {
-            /* CHANGE THIS NUMBER (e.g. 50%, 60%, 70%) to resize the frames */
+            /* 80% for the Slides/Notes */
             width: 80%; 
             height: 100%;
-            border-right: 3px solid #000; /* Thicker line to see the separation */
+            border-right: 3px solid #000;
         }
 
         /* Compiler Section - Automatically takes the remaining space */
@@ -51,16 +50,20 @@
     <div class="container">
         <div class="pdf-section">
             <iframe 
-                id="pdfFrame"
-                src="YOUR_PDF_LINK_HERE" 
-                title="PDF Viewer">
+                src="https://www.slideshare.net/slideshow/embed_code/key/uLFYFIhqSjyVWF" 
+                title="Java Notes Slideshare"
+                frameborder="0" 
+                marginwidth="0" 
+                marginheight="0" 
+                scrolling="no" 
+                allowfullscreen>
             </iframe>
         </div>
 
         <div class="compiler-section">
             <iframe 
-                src="https://www.onlinegdb.com/online_c_compiler" 
-                title="Online GDB C Compiler">
+                src="https://www.onlinegdb.com/online_java_compiler" 
+                title="Online GDB Java Compiler">
             </iframe>
         </div>
     </div>
