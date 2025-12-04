@@ -22,16 +22,17 @@
             width: 100vw;  /* 100% of Viewport Width */
         }
 
-        /* PDF Section - The "80 Ratio" */
+        /* --- ADJUST RATIO HERE --- */
         .pdf-section {
-            width: 75%; /* Adjusted to 75% so the compiler isn't too tiny, change to 80% if preferred */
+            /* CHANGE THIS NUMBER (e.g. 50%, 60%, 70%) to resize the frames */
+            width: 80%; 
             height: 100%;
-            border-right: 2px solid #333;
+            border-right: 3px solid #000; /* Thicker line to see the separation */
         }
 
-        /* Compiler Section - The remaining space */
+        /* Compiler Section - Automatically takes the remaining space */
         .compiler-section {
-            flex-grow: 1; /* Takes up remaining space */
+            flex-grow: 1; 
             height: 100%;
         }
 
