@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Study & C Compiler</title>
+    <style>
+        /* Reset margins to use full screen */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
 
+        /* Container for the split view */
+        .container {
+            display: flex;
+            height: 100vh; /* 100% of Viewport Height */
+            width: 100vw;  /* 100% of Viewport Width */
+        }
+
+        /* PDF Section - The "80 Ratio" */
+        .pdf-section {
+            width: 75%; /* Adjusted to 75% so the compiler isn't too tiny, change to 80% if preferred */
+            height: 100%;
+            border-right: 2px solid #333;
+        }
+
+        /* Compiler Section - The remaining space */
+        .compiler-section {
+            flex-grow: 1; /* Takes up remaining space */
+            height: 100%;
+        }
+
+        /* Styling the iframes to fill their containers */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="pdf-section">
+            <iframe 
+                id="pdfFrame"
+                src="YOUR_PDF_LINK_HERE" 
+                title="PDF Viewer">
+            </iframe>
+        </div>
+
+        <div class="compiler-section">
+            <iframe 
+                src="https://www.onlinegdb.com/online_c_compiler" 
+                title="Online GDB C Compiler">
+            </iframe>
+        </div>
+    </div>
+
+</body>
+</html>
