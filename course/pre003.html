@@ -1,68 +1,398 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Study & C Compiler</title>
+    <title>Learning Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* Reset margins to use full screen */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
+        :root {
+            --bg-dark: #000000;
+            --surface: #111111;
+            --border-color: #333333;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --hover-bg: #222222;
         }
-
-        /* Container for the split view */
-        .container {
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            height: 100vh; 
+            width: 100vw;
+            overflow: hidden; /* Prevent body scroll, handle inside containers */
             display: flex;
-            height: 100vh; /* 100% of Viewport Height */
-            width: 100vw;  /* 100% of Viewport Width */
         }
 
-        /* PDF Section - The "80 Ratio" */
-        .pdf-section {
-            width: 75%; /* Adjusted to 75% so the compiler isn't too tiny, change to 80% if preferred */
+        /* ============================
+           LEFT SIDEBAR (30%)
+           ============================ */
+        .sidebar {
+            width: 30%;
             height: 100%;
-            border-right: 2px solid #333;
+            background: var(--surface);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
         }
 
-        /* Compiler Section - The remaining space */
-        .compiler-section {
-            flex-grow: 1; /* Takes up remaining space */
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            letter-spacing: 1px;
+        }
+
+        /* Sidebar Groups (Like Chat History) */
+        .nav-group {
+            margin-bottom: 20px;
+        }
+
+        .nav-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Dropdowns (A, B, C) */
+        details {
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+            background: #000;
+        }
+
+        summary {
+            padding: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none; /* Remove default triangle */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        summary:hover {
+            background: var(--hover-bg);
+        }
+
+        summary::after {
+            content: '\f078'; /* FontAwesome Chevron Down */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.8rem;
+            transition: transform 0.3s;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            padding: 10px 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-item {
+            display: block;
+            padding: 10px;
+            color: var(--text-muted);
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.2s;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .nav-item:hover {
+            background: var(--hover-bg);
+            color: #fff;
+            padding-left: 15px;
+        }
+
+        .nav-item.active {
+            background: #fff;
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* ============================
+           RIGHT CONTENT (70%)
+           ============================ */
+        .main-content {
+            width: 70%;
             height: 100%;
+            padding: 40px;
+            overflow-y: auto;
+            background: var(--bg-dark);
+            position: relative;
         }
 
-        /* Styling the iframes to fill their containers */
-        iframe {
+        .header-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            display: none; /* Hidden by default */
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .back-btn:hover { background: #fff; color: #000; }
+
+        /* --- VIEW 1: YOUTUBE CARDS GRID --- */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .video-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            border-color: #fff;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 150px;
+            background-color: #222;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .play-icon {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .card-info {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* --- VIEW 2: FULL CONTENT (Video Player or Iframe) --- */
+        .content-viewer {
+            display: none; /* Hidden by default */
             width: 100%;
             height: 100%;
-            border: none;
-            display: block;
+            flex-direction: column;
         }
+
+        .viewer-frame {
+            width: 100%;
+            flex-grow: 1; /* Fills remaining height */
+            border: none;
+            background: #000;
+        }
+
+        .loading-text {
+            color: #888;
+            text-align: center;
+            margin-top: 50px;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="pdf-section">
-            <iframe 
-                id="pdfFrame"
-                src="YOUR_PDF_LINK_HERE" 
-                title="PDF Viewer">
-            </iframe>
+    <div class="sidebar">
+        <div class="brand"><i class="fas fa-code"></i> TWSS HUB</div>
+
+        <div class="nav-group">
+            <div class="nav-label">Resources</div>
+            
+            <details>
+                <summary>Category A</summary>
+                <div class="dropdown-content">
+                    <div class="nav-item" onclick="loadContent('Sheet 1', 'https://twss-awe.pages.dev/dl')">Data Sheet A1</div>
+                    <div class="nav-item" onclick="loadContent('Notes', 'https://topperworld.in/media/2022/11/DSA-Handwritten-Notes.pdf')">DSA Notes</div>
+                </div>
+            </details>
+
+            <details>
+                <summary>Category B</summary>
+                <div class="dropdown-content">
+                    <div class="nav-item" onclick="loadContent('Reference', '/pdf/HTMLCSSJSCombined.pdf')">Dev Docs</div>
+                </div>
+            </details>
+
+            <details>
+                <summary>Category C</summary>
+                <div class="dropdown-content">
+                    <div class="nav-item">Archive 1</div>
+                    <div class="nav-item">Archive 2</div>
+                </div>
+            </details>
         </div>
 
-        <div class="compiler-section">
-            <iframe 
-                src="https://www.onlinegdb.com/online_c_compiler" 
-                title="Online GDB C Compiler">
-            </iframe>
+        <div class="nav-group">
+            <div class="nav-label">Quick Links</div>
+            
+            <div class="nav-item" onclick="loadContent('Project Sheet', 'https://twss-awe.pages.dev/dsa')">
+                <i class="fas fa-table"></i> Master Sheet
+            </div>
+
+            <div class="nav-item" onclick="loadContent('Full Stack Course', 'https://twss-awe.pages.dev/full.html')">
+                <i class="fas fa-layer-group"></i> Full Stack Web
+            </div>
+            
+            <div class="nav-item" onclick="showGrid()">
+                <i class="fas fa-th-large"></i> All Videos
+            </div>
+            <div class="nav-item">
+              <a href="twss.netlify.app/contact">  <i class="fas fa-th-large"></i> Contact</a>
+            </div>
         </div>
     </div>
 
+    <div class="main-content">
+        
+        <div class="header-area">
+            <h2 id="page-title">Video Library</h2>
+            <button id="backBtn" class="back-btn" onclick="showGrid()">
+                <i class="fas fa-arrow-left"></i> Back to Grid
+            </button>
+        </div>
+
+        <div id="videoGrid" class="video-grid">
+            </div>
+
+        <div id="contentViewer" class="content-viewer">
+            <iframe id="mainFrame" class="viewer-frame" src="" allowfullscreen></iframe>
+        </div>
+
+    </div>
+
+    <script>
+        // === 1. DATA CONFIGURATION ===
+        
+        // List of YouTube Videos to display on the Right
+        const videoList = [
+            { title: "Introduction to Arrays", duration: "", id: "37E9ckMDdTk" }, // Use YouTube ID
+            { title: "Stacks and Queues", duration: "", id: "tqQ5fTamIN4" }, 
+            { title: "Linked Lists", duration: "12:00", id: "cg6JGiXhQ9c" },
+            { title: "Binary Search intro", duration: "", id: "MHf6awe89xw" },
+            { title: "Binary Search Basics", duration: "", id: "6zhGS79oQ4k" },
+            { title: "Binary Search Implementation", duration: "", id: "hjR1IYVx9lY" },
+            { title: "Recursion", duration: "1:00:00", id: "yVdKa8dnKiE" }
+        ];
+
+        // === 2. DOM ELEMENTS ===
+        const videoGrid = document.getElementById('videoGrid');
+        const contentViewer = document.getElementById('contentViewer');
+        const mainFrame = document.getElementById('mainFrame');
+        const backBtn = document.getElementById('backBtn');
+        const pageTitle = document.getElementById('page-title');
+
+        // === 3. INITIALIZATION ===
+        
+        // Function to render the video grid
+        function renderGrid() {
+            videoGrid.innerHTML = '';
+            videoList.forEach(video => {
+                // Create Card HTML
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.onclick = () => playVideo(video.title, video.id);
+
+                // YouTube Thumbnail URL logic
+                const thumbUrl = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+
+                card.innerHTML = `
+                    <div class="thumbnail" style="background-image: url('${thumbUrl}')">
+                        <i class="fas fa-play-circle play-icon"></i>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">${video.title}</div>
+                        <div class="card-meta"><i class="far fa-clock"></i> ${video.duration}</div>
+                    </div>
+                `;
+                videoGrid.appendChild(card);
+            });
+        }
+
+        // === 4. INTERACTION FUNCTIONS ===
+
+        // A. Show the Grid (Home State)
+        function showGrid() {
+            videoGrid.style.display = 'grid';
+            contentViewer.style.display = 'none';
+            backBtn.style.display = 'none';
+            pageTitle.innerText = "Video Library";
+            mainFrame.src = ""; // Stop video/content when going back
+            
+            // Remove active class from sidebar items
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+        }
+
+        // B. Play YouTube Video
+        function playVideo(title, videoId) {
+            videoGrid.style.display = 'none';
+            contentViewer.style.display = 'flex';
+            backBtn.style.display = 'block';
+            pageTitle.innerText = title;
+            
+            // Set Iframe to YouTube Embed
+            mainFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        }
+
+        // C. Load Website (Sheet / Full Stack)
+        function loadContent(title, url) {
+            // Note: Some websites (like google.com) refuse to connect in an iframe due to X-Frame-Options.
+            // Ensure the links you use allow embedding.
+            
+            videoGrid.style.display = 'none';
+            contentViewer.style.display = 'flex';
+            backBtn.style.display = 'block';
+            pageTitle.innerText = title;
+
+            mainFrame.src = url;
+        }
+
+        // Run on Load
+        renderGrid();
+
+    </script>
 </body>
 </html>
