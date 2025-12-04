@@ -117,6 +117,14 @@
         </div>
     </div>
 
+    <div id="messageModal" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close-btn">&times;</span>
+            <div id="modal-icon" style="font-size: 3rem; margin-bottom: 20px;"></div>
+            <p id="modal-message" style="color: #fff;"></p>
+        </div>
+    </div>
+
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -130,6 +138,13 @@
                 <h3>Checkout Details</h3>
                 <input type="text" id="checkout-name" placeholder="Your Name" required>
                 <input type="email" id="checkout-email" placeholder="Your Email" required>
+                
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <input type="text" id="coupon-input" placeholder="Coupon Code" style="margin:0; text-transform: uppercase;">
+                    <button type="button" class="add-btn" style="width: auto; padding: 10px 20px; margin:0;" onclick="applyCoupon()">Apply</button>
+                </div>
+                <div id="coupon-msg" style="margin-top: 5px; font-size: 0.9rem; min-height: 20px;"></div>
+
                 <button type="submit" class="add-btn" style="margin-top:15px;">Pay Now</button>
             </form>
         </div>
@@ -244,19 +259,41 @@
             { id: "college_plan", name: "4 Years College Plan", price: 24900 },
         ];
 
+        // COUPON CONFIGURATION
+        const ownerCoupon = "OWNERFREE";
+
         let cart = [];
         let currentUser = null;
 
-        // UI Helpers
+        // DOM Elements
+        const messageModal = document.getElementById("messageModal");
+        const modalMessage = document.getElementById("modal-message");
+        const modalIcon = document.getElementById("modal-icon");
         const cartModal = document.getElementById("cartModal");
         const successModal = document.getElementById("purchaseSuccessModal");
         const authModal = document.getElementById("authModal");
         
+        const cartCountEl = document.getElementById('cart-count');
+        const cartItemsList = document.getElementById('cart-items');
+        const cartTotalEl = document.getElementById('cart-total');
+        const couponInput = document.getElementById('coupon-input');
+        const couponMsg = document.getElementById('coupon-msg');
+
+        let isOwnerOverride = false; // Flag for owner discount
+
+        // UI Helpers
+        window.showMessageModal = function(message, isSuccess = false) {
+            modalMessage.innerHTML = message;
+            modalIcon.innerHTML = isSuccess ? '<i class="fas fa-check-circle" style="color:white;"></i>' : '<i class="fas fa-exclamation-circle" style="color:white;"></i>';
+            messageModal.style.display = "block";
+        }
+
         document.querySelectorAll(".close-btn").forEach(btn => {
             btn.onclick = function() { 
                 cartModal.style.display = "none";
                 successModal.style.display = "none";
                 authModal.style.display = "none";
+                messageModal.style.display = "none";
             }
         });
 
@@ -271,33 +308,43 @@
                 updateCartUI();
                 cartModal.style.display = 'block';
             } else {
-                alert("Item already in cart");
+                window.showMessageModal("Item already in cart", false);
             }
         };
 
         window.updateCartUI = function() {
-            const list = document.getElementById('cart-items');
-            const count = document.getElementById('cart-count');
-            const totalEl = document.getElementById('cart-total');
-            
-            list.innerHTML = '';
-            count.innerText = cart.length;
-            let total = 0;
+            cartItemsList.innerHTML = '';
+            cartCountEl.innerText = cart.length;
+            let subtotal = 0;
 
             cart.forEach((item, index) => {
-                total += item.price;
-                list.innerHTML += `
+                subtotal += item.price;
+                cartItemsList.innerHTML += `
                     <li style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #333;">
                         <span>${item.name}</span>
                         <span>₹${item.price/100} <i class="fas fa-trash" style="cursor:pointer; margin-left:10px;" onclick="removeFromCart(${index})"></i></span>
                     </li>
                 `;
             });
-            totalEl.innerText = `Total: ₹${total/100}`;
+
+            // Calculate final total based on override
+            let total = isOwnerOverride ? 100 : Math.max(100, subtotal); // 100 paise = 1 rupee
+
+            if (isOwnerOverride) {
+                cartTotalEl.innerHTML = `<span style="text-decoration:line-through; color:#666; font-size:0.9rem;">₹${subtotal/100}</span> <br> Total: ₹${total/100}`;
+            } else {
+                cartTotalEl.innerText = `Total: ₹${total/100}`;
+            }
         }
 
         window.removeFromCart = function(index) {
             cart.splice(index, 1);
+            // Reset coupon if cart becomes empty
+            if (cart.length === 0) {
+                isOwnerOverride = false;
+                couponInput.value = "";
+                couponMsg.innerText = "";
+            }
             updateCartUI();
         }
 
@@ -307,7 +354,23 @@
         
         document.getElementById('cart-icon-btn').onclick = function() {
             cartModal.style.display = 'block';
+            updateCartUI();
         };
+
+        // COUPON LOGIC
+        window.applyCoupon = function() {
+            const code = couponInput.value.trim().toUpperCase();
+            if (cart.length === 0) return;
+
+            if (code === ownerCoupon) {
+                isOwnerOverride = true;
+                couponMsg.innerHTML = "<span style='color:#fff; font-weight:bold;'>Owner Code Applied! Pay ₹1.</span>";
+            } else {
+                isOwnerOverride = false;
+                couponMsg.innerHTML = "<span style='color:#666'>Invalid Coupon Code</span>";
+            }
+            updateCartUI();
+        }
 
         // Checkout & Payment
         window.showCheckoutForm = function() {
@@ -328,11 +391,13 @@
             const email = document.getElementById('checkout-email').value;
             const name = document.getElementById('checkout-name').value;
             
-            let amount = cart.reduce((acc, item) => acc + item.price, 0);
+            let subtotal = cart.reduce((acc, item) => acc + item.price, 0);
+            // If owner override is true, pay 100 paise (1 Rupee), else pay normal amount
+            let finalAmount = isOwnerOverride ? 100 : Math.max(100, subtotal);
 
             const options = {
                 key: RAZORPAY_KEY_ID,
-                amount: amount,
+                amount: finalAmount, // Amount in paise
                 currency: "INR",
                 name: "TWSS",
                 description: "Course Purchase",
@@ -341,7 +406,6 @@
                 handler: async function (response) {
                     try {
                         // SAVE TO DATABASE: PURCHASE TABLE
-                        // Loop through cart and insert one row per course
                         for (let item of cart) {
                             const { error } = await supabase
                                 .from('purchase')
@@ -355,13 +419,14 @@
 
                         // Success Actions
                         cart = [];
+                        isOwnerOverride = false; // Reset coupon
                         updateCartUI();
                         cartModal.style.display = 'none';
                         successModal.style.display = 'block'; // Show success modal
 
                     } catch (error) {
                         console.error(error);
-                        alert("Payment succeeded but database update failed.");
+                        window.showMessageModal("Payment succeeded but database update failed.", false);
                     }
                 }
             };
