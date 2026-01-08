@@ -3,450 +3,4515 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programming Hub - Premium Courses</title>
+    <title>TWSS - Technical Work for Software and Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
     <style>
-        :root {
-            --bg-dark: #000000;
-            --surface: #111111;
-            --border-color: #333333;
-            --neon-glow: #ffffff;
-            --text-main: #ffffff;
-            --text-muted: #888888;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        
-        body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; }
 
-        /* HERO & ANIMATION */
-        .hero-section {
-            height: 100vh;
+        :root {
+            --primary-black: #0a0a0a;
+            --primary-white: #ffffff;
+            --translucent-white: rgba(255, 255, 255, 0.08);
+            --translucent-black: rgba(0, 0, 0, 0.85);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-color: #d4d4d4;
+            --accent-hover: #ffffff;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #707070;
+            --card-hover: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--primary-black);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation Menu */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 40px;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: var(--translucent-black);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 12px 40px;
+        }
+
+        .nav-menu {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: space-around;
-            padding: 0 10%;
-            background: radial-gradient(circle at center, #222 0%, #000000 100%);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-primary);
+            background: var(--glass-bg);
+        }
+
+        /* Mobile Menu Button */
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(10, 10, 10, 0.8) 50%, var(--primary-black) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        .site-title {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            letter-spacing: -3px;
+            line-height: 1.1;
+        }
+
+        .site-subtitle {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--text-primary);
+            border: none;
+            color: var(--primary-black);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+        }
+
+        .cta-button-secondary {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button-secondary:hover {
+            background: var(--glass-bg);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Course Menu */
+        .course-menu {
+            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .menu-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 35px 30px;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .hero-text { z-index: 10; max-width: 500px; }
-        .hero-text h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; background: linear-gradient(to right, #fff, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-text p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px; }
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-        /* DATABASE ANIMATION */
-        .database-container {
-            position: relative; width: 300px; height: 400px; perspective: 1000px;
-            display: flex; flex-direction: column-reverse; align-items: center; justify-content: center;
-            transform: rotateX(10deg) rotateY(0deg);
+        .menu-item:hover::before {
+            opacity: 1;
         }
-        .disk {
-            position: relative; width: 260px; height: 70px; margin-top: -35px;
-            transition: transform 0.4s; z-index: 1;
-        }
-        .disk::before {
-            content: ''; position: absolute; top: -20px; left: 0; width: 100%; height: 100%;
-            border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ffffff, #999); z-index: 2;
-        }
-        .disk::after {
-            content: ''; position: absolute; top: 15px; left: 0; width: 100%; height: 40px;
-            background: linear-gradient(to right, #999, #ffffff 50%, #999);
-            border-radius: 0 0 50% 50% / 0 0 20px 20px; z-index: 1;
-        }
-        .disk:hover { transform: translateY(-20px); }
 
-        /* HEADER */
-        header {
-            position: fixed; top: 0; width: 100%; padding: 20px 50px;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 100; backdrop-filter: blur(10px); background: rgba(0, 0, 0, 0.8);
-            border-bottom: 1px solid var(--border-color);
+        .menu-item:hover {
+            transform: translateY(-8px);
+            background: var(--card-hover);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
         }
-        .logo { font-size: 1.5rem; font-weight: 700; color: #fff; text-decoration: none; }
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; }
-        .nav-links a:hover { color: #fff; }
-        
-        .cart-btn { position: relative; cursor: pointer; font-size: 1.2rem; color: #fff; }
-        .cart-count { position: absolute; top: -8px; right: -8px; background: #fff; color: #000; font-size: 0.7rem; padding: 2px 6px; border-radius: 50%; font-weight: bold; }
 
-        /* COURSES */
-        .courses-section { padding: 100px 5%; background: #050505; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-        
-        .course-card {
-            background: var(--surface); border: 1px solid var(--border-color); padding: 30px;
-            text-align: center; transition: 0.3s; position: relative;
+        .menu-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: block;
         }
-        .course-card:hover { transform: translateY(-5px); border-color: #fff; }
-        .card-title { font-size: 1.4rem; font-weight: 600; margin: 10px 0; color: #fff; }
-        .card-price { font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 20px; }
-        
-        .add-btn {
-            background: #fff; color: #000; border: 1px solid #fff; padding: 12px 30px;
-            font-weight: 600; cursor: pointer; width: 100%; transition: 0.3s;
-        }
-        .add-btn:hover { background: #000; color: #fff; }
 
-        /* MODALS */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); }
-        .modal-content { background: #000; margin: 5% auto; padding: 30px; border: 1px solid #fff; width: 90%; max-width: 500px; position: relative; color: #fff; }
-        .close-btn { position: absolute; right: 20px; top: 15px; font-size: 24px; cursor: pointer; }
-        
-        /* CHECKOUT FORM */
-        .checkout-form input { width: 100%; padding: 12px; margin: 8px 0; background: #111; border: 1px solid #444; color: white; }
+        .menu-item-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .menu-item-description {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .menu-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background: var(--text-primary);
+            color: var(--primary-black);
+            border-color: var(--text-primary);
+        }
+
+        .menu-button i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-button:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 0;
+            background: var(--glass-bg);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 8px;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(180deg, rgba(15, 15, 15, 1) 0%, var(--primary-black) 100%);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
+        }
+
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        #submit-btn {
+            width: 100%;
+            padding: 15px 40px;
+            background: var(--text-primary);
+            border: none;
+            color: var(--primary-black);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #submit-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+        }
+
+        #submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #success-message,
+        #error-message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        #success-message {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        #error-message {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 40px;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            background: var(--primary-black);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .footer-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 15px 20px;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 5px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                border-bottom: 1px solid var(--glass-border);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-link {
+                padding: 12px 20px;
+                text-align: center;
+                border-radius: 8px;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .site-title {
+                font-size: 3rem;
+                letter-spacing: -2px;
+            }
+
+            .site-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button,
+            .cta-button-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .site-title {
+                font-size: 2.2rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <div id="purchaseSuccessModal" class="modal">
-        <div class="modal-content" style="text-align: center;">
-            <span class="close-btn">&times;</span>
-            <i class="fas fa-check-circle" style="font-size: 3rem; color: #fff; margin-bottom: 20px;"></i>
-            <h2>Purchase Successful!</h2>
-            <p id="success-message" style="color: #ccc; margin: 20px 0;">Your courses have been added to your account.</p>
-            <a href="dashboard.html" class="add-btn" style="text-decoration: none; display: inline-block;">
-                <i class="fas fa-columns"></i> Go to Dashboard
-            </a>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-menu">
+            <div class="logo">TWSS</div>
+            <button class="menu-btn" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#courses" class="nav-link">Courses</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
         </div>
-    </div>
+    </nav>
 
-    <div id="messageModal" class="modal">
-        <div class="modal-content" style="text-align: center;">
-            <span class="close-btn">&times;</span>
-            <div id="modal-icon" style="font-size: 3rem; margin-bottom: 20px;"></div>
-            <p id="modal-message" style="color: #fff;"></p>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">Premium Learning Platform</div>
+            <h1 class="site-title">TWSS</h1>
+            <p class="site-subtitle">Technical Work for Software and Solutions. Master cutting-edge technologies with industry-expert designed courses.</p>
+            <div class="hero-buttons">
+                <a href="#courses" class="cta-button">Explore Courses</a>
+                <a href="#contact" class="cta-button-secondary">Get in Touch</a>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div id="cartModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2 style="border-bottom: 1px solid #333; padding-bottom: 10px;">Your Cart</h2>
-            <ul id="cart-items" style="list-style:none; margin: 20px 0;"></ul>
-            <div id="cart-total" style="text-align:right; font-size:1.2rem; font-weight:bold;"></div>
-            
-            <button class="add-btn" id="proceed-to-checkout" onclick="showCheckoutForm()" style="margin-top: 20px;">Proceed to Checkout</button>
-            
-            <form id="checkout-form" class="checkout-form" style="display:none; margin-top:15px;">
-                <h3>Checkout Details</h3>
-                <input type="text" id="checkout-name" placeholder="Your Name" required>
-                <input type="email" id="checkout-email" placeholder="Your Email" required>
-                
-                <div style="display: flex; gap: 10px; margin-top: 10px;">
-                    <input type="text" id="coupon-input" placeholder="Coupon Code" style="margin:0; text-transform: uppercase;">
-                    <button type="button" class="add-btn" style="width: auto; padding: 10px 20px; margin:0;" onclick="applyCoupon()">Apply</button>
+    <!-- Course Menu -->
+    <section id="courses" class="section course-menu">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-badge">Our Courses</span>
+                <h2 class="section-title">Learning Modules</h2>
+                <p class="section-subtitle">Master cutting-edge technologies with our comprehensive curriculum designed by industry experts</p>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-item animate">
+                    <i class="fas fa-brain menu-icon"></i>
+                    <h3 class="menu-item-title">Machine Learning & AI</h3>
+                    <p class="menu-item-description">Advanced algorithms, neural networks, and practical AI applications</p>
+                    <a href="/ml.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <div id="coupon-msg" style="margin-top: 5px; font-size: 0.9rem; min-height: 20px;"></div>
 
-                <button type="submit" class="add-btn" style="margin-top:15px;">Pay Now</button>
-            </form>
-        </div>
-    </div>
+                <div class="menu-item animate">
+                    <i class="fas fa-database menu-icon"></i>
+                    <h3 class="menu-item-title">Database Management</h3>
+                    <p class="menu-item-description">SQL, NoSQL, and enterprise data solutions</p>
+                    <a href="/dbms.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
 
-    <div id="authModal" class="modal">
-        <div class="modal-content" style="text-align: center;">
-            <span class="close-btn" onclick="closeModal('authModal')">&times;</span>
-            <h2>Login Required</h2>
-            <p>Please enter your email to continue</p>
-            <input type="email" id="login-email" class="checkout-form" style="width:100%; padding:12px; margin:20px 0; background:#111; border:1px solid #444; color:#fff;" placeholder="Enter Email">
-            <button class="add-btn" onclick="mockLogin()">Continue</button>
-        </div>
-    </div>
+                <div class="menu-item animate">
+                    <i class="fab fa-python menu-icon"></i>
+                    <h3 class="menu-item-title">Python Programming</h3>
+                    <p class="menu-item-description">From basics to advanced Python development</p>
+                    <a href="/pythontut.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
 
-    <header>
-        <div class="logo">TW<span>SS</span></div>
-        <nav class="nav-links">
-            <a href="#courses">Courses</a>
-        </nav>
-        <div style="display: flex; gap: 20px; align-items: center;">
-            <button class="add-btn" style="width: auto; padding: 5px 15px;" onclick="openAuthModal()">Login</button>
-            <div class="cart-btn" id="cart-icon-btn">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count" id="cart-count">0</span>
-            </div>
-        </div>
-    </header>
+                <div class="menu-item animate">
+                    <i class="fab fa-microsoft menu-icon"></i>
+                    <h3 class="menu-item-title">Microsoft Azure</h3>
+                    <p class="menu-item-description">Cloud computing and Azure services</p>
+                    <a href="/Azure.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
 
-    <section class="hero-section">
-        <div class="hero-text">
-            <h1>Master Data & <br> Development</h1>
-            <p>Premium resources for Python, SQL, and Full Stack mastery.</p>
-            <a href="#courses" class="add-btn" style="width: auto; text-decoration: none;">Get Started</a>
-        </div>
-        <div class="database-container">
-            <div class="disk"></div><div class="disk"></div><div class="disk"></div>
-        </div>
-    </section>
+                <div class="menu-item animate">
+                    <i class="fas fa-microchip menu-icon"></i>
+                    <h3 class="menu-item-title">C Programming</h3>
+                    <p class="menu-item-description">System programming and memory management</p>
+                    <a href="/c.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
 
-    <section id="courses" class="courses-section">
-        <div class="section-header"><h2>Premium Courses</h2></div>
-        <div class="grid-container">
-            <div class="course-card" data-product-id="c_notes">
-                <div class="card-title">C Language Notes</div>
-                <div class="card-price">₹9</div>
-                <button class="add-btn add-to-cart-btn">Add to Cart</button>
-            </div>
-            <div class="course-card" data-product-id="cpp_notes">
-                <div class="card-title">C++ Language Notes</div>
-                <div class="card-price">₹9</div>
-                <button class="add-btn add-to-cart-btn">Add to Cart</button>
-            </div>
-            <div class="course-card" data-product-id="java_notes">
-                <div class="card-title">JAVA Language Notes</div>
-                <div class="card-price">₹9</div>
-                <button class="add-btn add-to-cart-btn">Add to Cart</button>
-            </div>
-            <div class="course-card" data-product-id="python_notes">
-                <div class="card-title">Python Language Notes</div>
-                <div class="card-price">₹9</div>
-                <button class="add-btn add-to-cart-btn">Add to Cart</button>
-            </div>
-            <div class="course-card" data-product-id="sql_notes">
-                <div class="card-title">SQL Language Notes</div>
-                <div class="card-price">₹9</div>
-                <button class="add-btn add-to-cart-btn">Add to Cart</button>
-            </div>
-            <div class="course-card" data-product-id="website_plan">
-                <div class="card-title">Website & Domain Plan</div>
-                <div class="card-price">₹79</div>
-                <button class="add-btn add-to-cart-btn">Add to Cart</button>
-            </div>
-            <div class="course-card" data-product-id="dsa_fullstack">
-                <div class="card-title">DSA + Full-Stack Plan</div>
-                <div class="card-price">₹149</div>
-                <button class="add-btn add-to-cart-btn">Add to Cart</button>
-            </div>
-            <div class="course-card" data-product-id="dsa_analytics">
-                <div class="card-title">DSA + Data Analytics Plan</div>
-                <div class="card-price">₹159</div>
-                <button class="add-btn add-to-cart-btn">Add to Cart</button>
-            </div>
-            <div class="course-card" data-product-id="college_plan">
-                <div class="card-title">4 Years College Plan</div>
-                <div class="card-price">₹249</div>
-                <button class="add-btn add-to-cart-btn">Add to Cart</button>
+                <div class="menu-item animate">
+                    <i class="fas fa-cube menu-icon"></i>
+                    <h3 class="menu-item-title">C++ Programming</h3>
+                    <p class="menu-item-description">Object-oriented programming and STL</p>
+                    <a href="/cpp.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-sitemap menu-icon"></i>
+                    <h3 class="menu-item-title">Data Structures & Algorithms</h3>
+                    <p class="menu-item-description">Essential concepts for efficient programming</p>
+                    <a href="/Dsa-Twss-ai.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-cloud-database menu-icon"></i>
+                    <h3 class="menu-item-title">NoSQL & Big Data</h3>
+                    <p class="menu-item-description">Modern database technologies and big data processing</p>
+                    <a href="/dbms1.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item animate">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">COURSES</span>
+                </div>
+                <div class="stat-item animate">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">MODULES</span>
+                </div>
+                <div class="stat-item animate">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">HANDS-ON</span>
+                </div>
+                <div class="stat-item animate">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">SUPPORT</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <script type="module">
-        // Supabase Initialization
-        const supabaseUrl = 'https://fzwvxesrtdilljgrntpw.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6d3Z4ZXNydGRpbGxqZ3JudHB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4NzU2NzMsImV4cCI6MjA2NjQ1MTY3M30.YnxjUtFawuumihyVGuk8e-o6iE9OkDf-MX1aKRTqA5U';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-        
-        const RAZORPAY_KEY_ID = "rzp_live_iwzig23hBqUD90";
-        
-        // Product Data matching the Cards above
-        const products = [
-            { id: "c_notes", name: "C Language Notes", price: 900 },
-            { id: "cpp_notes", name: "C++ Language Notes", price: 900 },
-            { id: "java_notes", name: "JAVA Language Notes", price: 900 },
-            { id: "python_notes", name: "Python Language Notes", price: 900 },
-            { id: "sql_notes", name: "SQL Language Notes", price: 900 },
-            { id: "website_plan", name: "Website & Domain Plan", price: 7900 },
-            { id: "dsa_fullstack", name: "DSA + Full-Stack Plan", price: 14900 },
-            { id: "dsa_analytics", name: "DSA + Data Analytics Plan", price: 15900 },
-            { id: "college_plan", name: "4 Years College Plan", price: 24900 },
-        ];
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-badge">About Us</span>
+                <h2 class="section-title">Why Choose TWSS</h2>
+            </div>
 
-        // COUPON CONFIGURATION
-        const ownerCoupon = "OWNERFREE";
+            <div class="about-content animate">
+                <p class="about-text">
+                    TWSS (Technical Work for Software and Solutions) is a premier learning platform dedicated to providing high-quality technical education. Our courses are designed by industry experts with years of real-world experience, ensuring you learn practical skills that employers value.
+                </p>
+                <p class="about-text">
+                    We believe in hands-on learning, project-based education, and continuous support to help you achieve your career goals in the tech industry.
+                </p>
+            </div>
 
-        let cart = [];
-        let currentUser = null;
+            <div class="features-grid">
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="feature-title">Expert-Led Content</h4>
+                    <p class="feature-description">Learn from industry professionals with years of experience</p>
+                </div>
 
-        // DOM Elements
-        const messageModal = document.getElementById("messageModal");
-        const modalMessage = document.getElementById("modal-message");
-        const modalIcon = document.getElementById("modal-icon");
-        const cartModal = document.getElementById("cartModal");
-        const successModal = document.getElementById("purchaseSuccessModal");
-        const authModal = document.getElementById("authModal");
-        
-        const cartCountEl = document.getElementById('cart-count');
-        const cartItemsList = document.getElementById('cart-items');
-        const cartTotalEl = document.getElementById('cart-total');
-        const couponInput = document.getElementById('coupon-input');
-        const couponMsg = document.getElementById('coupon-msg');
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h4 class="feature-title">Hands-On Projects</h4>
+                    <p class="feature-description">Practical exercises and real-world projects</p>
+                </div>
 
-        let isOwnerOverride = false; // Flag for owner discount
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4 class="feature-title">Flexible Learning</h4>
+                    <p class="feature-description">Learn at your own pace, anytime, anywhere</p>
+                </div>
 
-        // UI Helpers
-        window.showMessageModal = function(message, isSuccess = false) {
-            modalMessage.innerHTML = message;
-            modalIcon.innerHTML = isSuccess ? '<i class="fas fa-check-circle" style="color:white;"></i>' : '<i class="fas fa-exclamation-circle" style="color:white;"></i>';
-            messageModal.style.display = "block";
-        }
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h4 class="feature-title">Certification</h4>
+                    <p class="feature-description">Earn certificates upon course completion</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        document.querySelectorAll(".close-btn").forEach(btn => {
-            btn.onclick = function() { 
-                cartModal.style.display = "none";
-                successModal.style.display = "none";
-                authModal.style.display = "none";
-                messageModal.style.display = "none";
-            }
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-badge">Get in Touch</span>
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            </div>
+
+            <div class="contact-content animate">
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="from_name" required placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="from_email" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Enter subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Enter your message"></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn">Send Message</button>
+                    </form>
+                    <div id="success-message" style="display: none;">
+                        <i class="fas fa-check-circle"></i> Thank you for your message! We'll contact you soon.
+                    </div>
+                    <div id="error-message" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again later.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">TWSS</div>
+                <p class="footer-text">
+                    Technical Work for Software and Solutions
+                </p>
+                <p class="footer-text">
+                    Visit our main platform at <a href="https://twss.netlify.app" class="footer-link">twss.netlify.app</a>
+                </p>
+                <p class="footer-text">
+                    Building technical excellence through comprehensive education and practical experience.
+                </p>
+                <div class="footer-bottom">
+                    &copy; 2025 TWSS. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("3BMbctG8PLkgdT2XV");
+        })();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
         });
 
-        // Cart Logic
-        window.addToCart = function(btn) {
-            const unitCard = btn.closest('.course-card');
-            const productId = unitCard.getAttribute('data-product-id');
-            const product = products.find(p => p.id === productId);
-            
-            if (product && !cart.some(item => item.id === product.id)) {
-                cart.push(product);
-                updateCartUI();
-                cartModal.style.display = 'block';
-            } else {
-                window.showMessageModal("Item already in cart", false);
-            }
-        };
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
 
-        window.updateCartUI = function() {
-            cartItemsList.innerHTML = '';
-            cartCountEl.innerText = cart.length;
-            let subtotal = 0;
-
-            cart.forEach((item, index) => {
-                subtotal += item.price;
-                cartItemsList.innerHTML += `
-                    <li style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #333;">
-                        <span>${item.name}</span>
-                        <span>₹${item.price/100} <i class="fas fa-trash" style="cursor:pointer; margin-left:10px;" onclick="removeFromCart(${index})"></i></span>
-                    </li>
-                `;
-            });
-
-            // Calculate final total based on override
-            let total = isOwnerOverride ? 100 : Math.max(100, subtotal); // 100 paise = 1 rupee
-
-            if (isOwnerOverride) {
-                cartTotalEl.innerHTML = `<span style="text-decoration:line-through; color:#666; font-size:0.9rem;">₹${subtotal/100}</span> <br> Total: ₹${total/100}`;
-            } else {
-                cartTotalEl.innerText = `Total: ₹${total/100}`;
-            }
-        }
-
-        window.removeFromCart = function(index) {
-            cart.splice(index, 1);
-            // Reset coupon if cart becomes empty
-            if (cart.length === 0) {
-                isOwnerOverride = false;
-                couponInput.value = "";
-                couponMsg.innerText = "";
-            }
-            updateCartUI();
-        }
-
-        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-            btn.onclick = function() { window.addToCart(this); };
-        });
-        
-        document.getElementById('cart-icon-btn').onclick = function() {
-            cartModal.style.display = 'block';
-            updateCartUI();
-        };
-
-        // COUPON LOGIC
-        window.applyCoupon = function() {
-            const code = couponInput.value.trim().toUpperCase();
-            if (cart.length === 0) return;
-
-            if (code === ownerCoupon) {
-                isOwnerOverride = true;
-                couponMsg.innerHTML = "<span style='color:#fff; font-weight:bold;'>Owner Code Applied! Pay ₹1.</span>";
-            } else {
-                isOwnerOverride = false;
-                couponMsg.innerHTML = "<span style='color:#666'>Invalid Coupon Code</span>";
-            }
-            updateCartUI();
-        }
-
-        // Checkout & Payment
-        window.showCheckoutForm = function() {
-            if(cart.length === 0) return;
-            if(!currentUser) {
-                cartModal.style.display = 'none';
-                authModal.style.display = 'block';
-                return;
-            }
-            document.getElementById('proceed-to-checkout').style.display = 'none';
-            document.getElementById('checkout-form').style.display = 'block';
-            document.getElementById('checkout-name').value = "User";
-            document.getElementById('checkout-email').value = currentUser.email;
-        }
-
-        document.getElementById('checkout-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('checkout-email').value;
-            const name = document.getElementById('checkout-name').value;
-            
-            let subtotal = cart.reduce((acc, item) => acc + item.price, 0);
-            // If owner override is true, pay 100 paise (1 Rupee), else pay normal amount
-            let finalAmount = isOwnerOverride ? 100 : Math.max(100, subtotal);
-
-            const options = {
-                key: RAZORPAY_KEY_ID,
-                amount: finalAmount, // Amount in paise
-                currency: "INR",
-                name: "TWSS",
-                description: "Course Purchase",
-                prefill: { name: name, email: email },
-                theme: { color: "#000000" },
-                handler: async function (response) {
-                    try {
-                        // SAVE TO DATABASE: PURCHASE TABLE
-                        for (let item of cart) {
-                            const { error } = await supabase
-                                .from('purchase')
-                                .insert([{ 
-                                    email: email, 
-                                    purchased_content: item.name,
-                                    created_at: new Date()
-                                }]);
-                            if (error) throw error;
-                        }
-
-                        // Success Actions
-                        cart = [];
-                        isOwnerOverride = false; // Reset coupon
-                        updateCartUI();
-                        cartModal.style.display = 'none';
-                        successModal.style.display = 'block'; // Show success modal
-
-                    } catch (error) {
-                        console.error(error);
-                        window.showMessageModal("Payment succeeded but database update failed.", false);
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768) {
+                        navLinks.classList.remove('active');
+                        const icon = menuBtn.querySelector('i');
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
                     }
                 }
-            };
-            
-            const rzp = new Razorpay(options);
-            rzp.open();
+            });
         });
 
-        // Simple Auth Mock
-        window.mockLogin = function() {
-            const email = document.getElementById('login-email').value;
-            if(email) {
-                currentUser = { email: email };
-                authModal.style.display = 'none';
-                cartModal.style.display = 'block';
-                showCheckoutForm();
+        // Scroll-based navbar background
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav-container');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.pageYOffset;
+
+            sections.forEach(section => {
+                const sectionHeight = section.offsetHeight;
+                const sectionTop = section.offsetTop - 100;
+                const sectionId = section.getAttribute('id');
+                const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    if (navLink) navLink.classList.add('active');
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg');
+            if (heroBg && scrollPosition < window.innerHeight) {
+                heroBg.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+            }
+        });
+
+        // Contact Form Submission
+        window.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.textContent = "Sending...";
+                submitBtn.disabled = true;
+
+                successMsg.style.display = 'none';
+                errorMsg.style.display = 'none';
+
+                // Send form using EmailJS
+                emailjs.sendForm('service_ood6pkb', 'template_ri7qwvd', form)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    form.reset();
+                    successMsg.style.display = 'block';
+                    setTimeout(() => successMsg.style.display = 'none', 5000);
+                })
+                .catch(function(error) {
+                    console.error('FAILED...', error);
+                    errorMsg.style.display = 'block';
+                })
+                .finally(function() {
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+            });
+        });
+
+        // Prevent right-click and developer tools
+        document.onkeydown = function(e) {
+            if (
+                e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S') ||
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i'))
+            ) {
+                return false;
+            }
+        };
+
+        document.addEventListener('contextmenu', event => {
+            event.preventDefault();
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TWSS - Technical Work for Software and Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #0a0a0a;
+            --primary-white: #ffffff;
+            --translucent-white: rgba(255, 255, 255, 0.08);
+            --translucent-black: rgba(0, 0, 0, 0.85);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-color: #d4d4d4;
+            --accent-hover: #ffffff;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #707070;
+            --card-hover: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--primary-black);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation Menu */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 40px;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: var(--translucent-black);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 12px 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-primary);
+            background: var(--glass-bg);
+        }
+
+        /* Mobile Menu Button */
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(10, 10, 10, 0.8) 50%, var(--primary-black) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        .site-title {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            letter-spacing: -3px;
+            line-height: 1.1;
+        }
+
+        .site-subtitle {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--text-primary);
+            border: none;
+            color: var(--primary-black);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+        }
+
+        .cta-button-secondary {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button-secondary:hover {
+            background: var(--glass-bg);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Course Menu */
+        .course-menu {
+            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .menu-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 35px 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-item:hover::before {
+            opacity: 1;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            background: var(--card-hover);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .menu-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .menu-item-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .menu-item-description {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .menu-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background: var(--text-primary);
+            color: var(--primary-black);
+            border-color: var(--text-primary);
+        }
+
+        .menu-button i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-button:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 0;
+            background: var(--glass-bg);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 8px;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(180deg, rgba(15, 15, 15, 1) 0%, var(--primary-black) 100%);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
+        }
+
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        #submit-btn {
+            width: 100%;
+            padding: 15px 40px;
+            background: var(--text-primary);
+            border: none;
+            color: var(--primary-black);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #submit-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+        }
+
+        #submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #success-message,
+        #error-message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        #success-message {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        #error-message {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 40px;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            background: var(--primary-black);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .footer-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-        window.openAuthModal = function() { authModal.style.display = 'block'; }
-        window.closeModal = function(id) { document.getElementById(id).style.display = 'none'; }
+
+        .animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 15px 20px;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 5px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                border-bottom: 1px solid var(--glass-border);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-link {
+                padding: 12px 20px;
+                text-align: center;
+                border-radius: 8px;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .site-title {
+                font-size: 3rem;
+                letter-spacing: -2px;
+            }
+
+            .site-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button,
+            .cta-button-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .site-title {
+                font-size: 2.2rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-menu">
+            <div class="logo">TWSS</div>
+            <button class="menu-btn" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#courses" class="nav-link">Courses</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">Premium Learning Platform</div>
+            <h1 class="site-title">TWSS</h1>
+            <p class="site-subtitle">Technical Work for Software and Solutions. Master cutting-edge technologies with industry-expert designed courses.</p>
+            <div class="hero-buttons">
+                <a href="#courses" class="cta-button">Explore Courses</a>
+                <a href="#contact" class="cta-button-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Menu -->
+    <section id="courses" class="section course-menu">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-badge">Our Courses</span>
+                <h2 class="section-title">Learning Modules</h2>
+                <p class="section-subtitle">Master cutting-edge technologies with our comprehensive curriculum designed by industry experts</p>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-item animate">
+                    <i class="fas fa-brain menu-icon"></i>
+                    <h3 class="menu-item-title">Machine Learning & AI</h3>
+                    <p class="menu-item-description">Advanced algorithms, neural networks, and practical AI applications</p>
+                    <a href="/ml.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-database menu-icon"></i>
+                    <h3 class="menu-item-title">Database Management</h3>
+                    <p class="menu-item-description">SQL, NoSQL, and enterprise data solutions</p>
+                    <a href="/dbms.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fab fa-python menu-icon"></i>
+                    <h3 class="menu-item-title">Python Programming</h3>
+                    <p class="menu-item-description">From basics to advanced Python development</p>
+                    <a href="/pythontut.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fab fa-microsoft menu-icon"></i>
+                    <h3 class="menu-item-title">Microsoft Azure</h3>
+                    <p class="menu-item-description">Cloud computing and Azure services</p>
+                    <a href="/Azure.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-microchip menu-icon"></i>
+                    <h3 class="menu-item-title">C Programming</h3>
+                    <p class="menu-item-description">System programming and memory management</p>
+                    <a href="/c.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-cube menu-icon"></i>
+                    <h3 class="menu-item-title">C++ Programming</h3>
+                    <p class="menu-item-description">Object-oriented programming and STL</p>
+                    <a href="/cpp.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-sitemap menu-icon"></i>
+                    <h3 class="menu-item-title">Data Structures & Algorithms</h3>
+                    <p class="menu-item-description">Essential concepts for efficient programming</p>
+                    <a href="/Dsa-Twss-ai.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-cloud-database menu-icon"></i>
+                    <h3 class="menu-item-title">NoSQL & Big Data</h3>
+                    <p class="menu-item-description">Modern database technologies and big data processing</p>
+                    <a href="/dbms1.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item animate">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">COURSES</span>
+                </div>
+                <div class="stat-item animate">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">MODULES</span>
+                </div>
+                <div class="stat-item animate">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">HANDS-ON</span>
+                </div>
+                <div class="stat-item animate">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">SUPPORT</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-badge">About Us</span>
+                <h2 class="section-title">Why Choose TWSS</h2>
+            </div>
+
+            <div class="about-content animate">
+                <p class="about-text">
+                    TWSS (Technical Work for Software and Solutions) is a premier learning platform dedicated to providing high-quality technical education. Our courses are designed by industry experts with years of real-world experience, ensuring you learn practical skills that employers value.
+                </p>
+                <p class="about-text">
+                    We believe in hands-on learning, project-based education, and continuous support to help you achieve your career goals in the tech industry.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="feature-title">Expert-Led Content</h4>
+                    <p class="feature-description">Learn from industry professionals with years of experience</p>
+                </div>
+
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h4 class="feature-title">Hands-On Projects</h4>
+                    <p class="feature-description">Practical exercises and real-world projects</p>
+                </div>
+
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4 class="feature-title">Flexible Learning</h4>
+                    <p class="feature-description">Learn at your own pace, anytime, anywhere</p>
+                </div>
+
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h4 class="feature-title">Certification</h4>
+                    <p class="feature-description">Earn certificates upon course completion</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-badge">Get in Touch</span>
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            </div>
+
+            <div class="contact-content animate">
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="from_name" required placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="from_email" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Enter subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Enter your message"></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn">Send Message</button>
+                    </form>
+                    <div id="success-message" style="display: none;">
+                        <i class="fas fa-check-circle"></i> Thank you for your message! We'll contact you soon.
+                    </div>
+                    <div id="error-message" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again later.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">TWSS</div>
+                <p class="footer-text">
+                    Technical Work for Software and Solutions
+                </p>
+                <p class="footer-text">
+                    Visit our main platform at <a href="https://twss.netlify.app" class="footer-link">twss.netlify.app</a>
+                </p>
+                <p class="footer-text">
+                    Building technical excellence through comprehensive education and practical experience.
+                </p>
+                <div class="footer-bottom">
+                    &copy; 2025 TWSS. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("3BMbctG8PLkgdT2XV");
+        })();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768) {
+                        navLinks.classList.remove('active');
+                        const icon = menuBtn.querySelector('i');
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
+                    }
+                }
+            });
+        });
+
+        // Scroll-based navbar background
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav-container');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.pageYOffset;
+
+            sections.forEach(section => {
+                const sectionHeight = section.offsetHeight;
+                const sectionTop = section.offsetTop - 100;
+                const sectionId = section.getAttribute('id');
+                const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    if (navLink) navLink.classList.add('active');
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg');
+            if (heroBg && scrollPosition < window.innerHeight) {
+                heroBg.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+            }
+        });
+
+        // Contact Form Submission
+        window.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.textContent = "Sending...";
+                submitBtn.disabled = true;
+
+                successMsg.style.display = 'none';
+                errorMsg.style.display = 'none';
+
+                // Send form using EmailJS
+                emailjs.sendForm('service_ood6pkb', 'template_ri7qwvd', form)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    form.reset();
+                    successMsg.style.display = 'block';
+                    setTimeout(() => successMsg.style.display = 'none', 5000);
+                })
+                .catch(function(error) {
+                    console.error('FAILED...', error);
+                    errorMsg.style.display = 'block';
+                })
+                .finally(function() {
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+            });
+        });
+
+        // Prevent right-click and developer tools
+        document.onkeydown = function(e) {
+            if (
+                e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S') ||
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i'))
+            ) {
+                return false;
+            }
+        };
+
+        document.addEventListener('contextmenu', event => {
+            event.preventDefault();
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TWSS - Technical Work for Software and Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #0a0a0a;
+            --primary-white: #ffffff;
+            --translucent-white: rgba(255, 255, 255, 0.08);
+            --translucent-black: rgba(0, 0, 0, 0.85);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-color: #d4d4d4;
+            --accent-hover: #ffffff;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #707070;
+            --card-hover: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--primary-black);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation Menu */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 40px;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: var(--translucent-black);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 12px 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-primary);
+            background: var(--glass-bg);
+        }
+
+        /* Mobile Menu Button */
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(10, 10, 10, 0.8) 50%, var(--primary-black) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        .site-title {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            letter-spacing: -3px;
+            line-height: 1.1;
+        }
+
+        .site-subtitle {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--text-primary);
+            border: none;
+            color: var(--primary-black);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+        }
+
+        .cta-button-secondary {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button-secondary:hover {
+            background: var(--glass-bg);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Course Menu */
+        .course-menu {
+            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .menu-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 35px 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-item:hover::before {
+            opacity: 1;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            background: var(--card-hover);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .menu-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .menu-item-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .menu-item-description {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .menu-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background: var(--text-primary);
+            color: var(--primary-black);
+            border-color: var(--text-primary);
+        }
+
+        .menu-button i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-button:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 0;
+            background: var(--glass-bg);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 8px;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(180deg, rgba(15, 15, 15, 1) 0%, var(--primary-black) 100%);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
+        }
+
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        #submit-btn {
+            width: 100%;
+            padding: 15px 40px;
+            background: var(--text-primary);
+            border: none;
+            color: var(--primary-black);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #submit-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+        }
+
+        #submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #success-message,
+        #error-message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        #success-message {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        #error-message {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 40px;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            background: var(--primary-black);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .footer-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 15px 20px;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 5px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                border-bottom: 1px solid var(--glass-border);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-link {
+                padding: 12px 20px;
+                text-align: center;
+                border-radius: 8px;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .site-title {
+                font-size: 3rem;
+                letter-spacing: -2px;
+            }
+
+            .site-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button,
+            .cta-button-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .site-title {
+                font-size: 2.2rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-menu">
+            <div class="logo">TWSS</div>
+            <button class="menu-btn" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#courses" class="nav-link">Courses</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">Premium Learning Platform</div>
+            <h1 class="site-title">TWSS</h1>
+            <p class="site-subtitle">Technical Work for Software and Solutions. Master cutting-edge technologies with industry-expert designed courses.</p>
+            <div class="hero-buttons">
+                <a href="#courses" class="cta-button">Explore Courses</a>
+                <a href="#contact" class="cta-button-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Menu -->
+    <section id="courses" class="section course-menu">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-badge">Our Courses</span>
+                <h2 class="section-title">Learning Modules</h2>
+                <p class="section-subtitle">Master cutting-edge technologies with our comprehensive curriculum designed by industry experts</p>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-item animate">
+                    <i class="fas fa-brain menu-icon"></i>
+                    <h3 class="menu-item-title">Machine Learning & AI</h3>
+                    <p class="menu-item-description">Advanced algorithms, neural networks, and practical AI applications</p>
+                    <a href="/ml.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-database menu-icon"></i>
+                    <h3 class="menu-item-title">Database Management</h3>
+                    <p class="menu-item-description">SQL, NoSQL, and enterprise data solutions</p>
+                    <a href="/dbms.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fab fa-python menu-icon"></i>
+                    <h3 class="menu-item-title">Python Programming</h3>
+                    <p class="menu-item-description">From basics to advanced Python development</p>
+                    <a href="/pythontut.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fab fa-microsoft menu-icon"></i>
+                    <h3 class="menu-item-title">Microsoft Azure</h3>
+                    <p class="menu-item-description">Cloud computing and Azure services</p>
+                    <a href="/Azure.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-microchip menu-icon"></i>
+                    <h3 class="menu-item-title">C Programming</h3>
+                    <p class="menu-item-description">System programming and memory management</p>
+                    <a href="/c.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-cube menu-icon"></i>
+                    <h3 class="menu-item-title">C++ Programming</h3>
+                    <p class="menu-item-description">Object-oriented programming and STL</p>
+                    <a href="/cpp.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-sitemap menu-icon"></i>
+                    <h3 class="menu-item-title">Data Structures & Algorithms</h3>
+                    <p class="menu-item-description">Essential concepts for efficient programming</p>
+                    <a href="/Dsa-Twss-ai.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-cloud-database menu-icon"></i>
+                    <h3 class="menu-item-title">NoSQL & Big Data</h3>
+                    <p class="menu-item-description">Modern database technologies and big data processing</p>
+                    <a href="/dbms1.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item animate">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">COURSES</span>
+                </div>
+                <div class="stat-item animate">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">MODULES</span>
+                </div>
+                <div class="stat-item animate">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">HANDS-ON</span>
+                </div>
+                <div class="stat-item animate">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">SUPPORT</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-badge">About Us</span>
+                <h2 class="section-title">Why Choose TWSS</h2>
+            </div>
+
+            <div class="about-content animate">
+                <p class="about-text">
+                    TWSS (Technical Work for Software and Solutions) is a premier learning platform dedicated to providing high-quality technical education. Our courses are designed by industry experts with years of real-world experience, ensuring you learn practical skills that employers value.
+                </p>
+                <p class="about-text">
+                    We believe in hands-on learning, project-based education, and continuous support to help you achieve your career goals in the tech industry.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="feature-title">Expert-Led Content</h4>
+                    <p class="feature-description">Learn from industry professionals with years of experience</p>
+                </div>
+
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h4 class="feature-title">Hands-On Projects</h4>
+                    <p class="feature-description">Practical exercises and real-world projects</p>
+                </div>
+
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4 class="feature-title">Flexible Learning</h4>
+                    <p class="feature-description">Learn at your own pace, anytime, anywhere</p>
+                </div>
+
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h4 class="feature-title">Certification</h4>
+                    <p class="feature-description">Earn certificates upon course completion</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-badge">Get in Touch</span>
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            </div>
+
+            <div class="contact-content animate">
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="from_name" required placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="from_email" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Enter subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Enter your message"></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn">Send Message</button>
+                    </form>
+                    <div id="success-message" style="display: none;">
+                        <i class="fas fa-check-circle"></i> Thank you for your message! We'll contact you soon.
+                    </div>
+                    <div id="error-message" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again later.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">TWSS</div>
+                <p class="footer-text">
+                    Technical Work for Software and Solutions
+                </p>
+                <p class="footer-text">
+                    Visit our main platform at <a href="https://twss.netlify.app" class="footer-link">twss.netlify.app</a>
+                </p>
+                <p class="footer-text">
+                    Building technical excellence through comprehensive education and practical experience.
+                </p>
+                <div class="footer-bottom">
+                    &copy; 2025 TWSS. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("3BMbctG8PLkgdT2XV");
+        })();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768) {
+                        navLinks.classList.remove('active');
+                        const icon = menuBtn.querySelector('i');
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
+                    }
+                }
+            });
+        });
+
+        // Scroll-based navbar background
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav-container');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.pageYOffset;
+
+            sections.forEach(section => {
+                const sectionHeight = section.offsetHeight;
+                const sectionTop = section.offsetTop - 100;
+                const sectionId = section.getAttribute('id');
+                const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    if (navLink) navLink.classList.add('active');
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg');
+            if (heroBg && scrollPosition < window.innerHeight) {
+                heroBg.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+            }
+        });
+
+        // Contact Form Submission
+        window.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.textContent = "Sending...";
+                submitBtn.disabled = true;
+
+                successMsg.style.display = 'none';
+                errorMsg.style.display = 'none';
+
+                // Send form using EmailJS
+                emailjs.sendForm('service_ood6pkb', 'template_ri7qwvd', form)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    form.reset();
+                    successMsg.style.display = 'block';
+                    setTimeout(() => successMsg.style.display = 'none', 5000);
+                })
+                .catch(function(error) {
+                    console.error('FAILED...', error);
+                    errorMsg.style.display = 'block';
+                })
+                .finally(function() {
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+            });
+        });
+
+        // Prevent right-click and developer tools
+        document.onkeydown = function(e) {
+            if (
+                e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S') ||
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i'))
+            ) {
+                return false;
+            }
+        };
+
+        document.addEventListener('contextmenu', event => {
+            event.preventDefault();
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TWSS - Technical Work for Software and Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #0a0a0a;
+            --primary-white: #ffffff;
+            --translucent-white: rgba(255, 255, 255, 0.08);
+            --translucent-black: rgba(0, 0, 0, 0.85);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-color: #d4d4d4;
+            --accent-hover: #ffffff;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #707070;
+            --card-hover: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--primary-black);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation Menu */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 40px;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: var(--translucent-black);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 12px 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-primary);
+            background: var(--glass-bg);
+        }
+
+        /* Mobile Menu Button */
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(10, 10, 10, 0.8) 50%, var(--primary-black) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        .site-title {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            letter-spacing: -3px;
+            line-height: 1.1;
+        }
+
+        .site-subtitle {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--text-primary);
+            border: none;
+            color: var(--primary-black);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+        }
+
+        .cta-button-secondary {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button-secondary:hover {
+            background: var(--glass-bg);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Course Menu */
+        .course-menu {
+            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .menu-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 35px 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-item:hover::before {
+            opacity: 1;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            background: var(--card-hover);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .menu-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .menu-item-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .menu-item-description {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .menu-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background: var(--text-primary);
+            color: var(--primary-black);
+            border-color: var(--text-primary);
+        }
+
+        .menu-button i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-button:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 0;
+            background: var(--glass-bg);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 8px;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(180deg, rgba(15, 15, 15, 1) 0%, var(--primary-black) 100%);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
+        }
+
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        #submit-btn {
+            width: 100%;
+            padding: 15px 40px;
+            background: var(--text-primary);
+            border: none;
+            color: var(--primary-black);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #submit-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+        }
+
+        #submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #success-message,
+        #error-message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        #success-message {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        #error-message {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 40px;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            background: var(--primary-black);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .footer-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 15px 20px;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 5px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                border-bottom: 1px solid var(--glass-border);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-link {
+                padding: 12px 20px;
+                text-align: center;
+                border-radius: 8px;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .site-title {
+                font-size: 3rem;
+                letter-spacing: -2px;
+            }
+
+            .site-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button,
+            .cta-button-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .site-title {
+                font-size: 2.2rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-menu">
+            <div class="logo">TWSS</div>
+            <button class="menu-btn" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#courses" class="nav-link">Courses</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">Premium Learning Platform</div>
+            <h1 class="site-title">TWSS</h1>
+            <p class="site-subtitle">Technical Work for Software and Solutions. Master cutting-edge technologies with industry-expert designed courses.</p>
+            <div class="hero-buttons">
+                <a href="#courses" class="cta-button">Explore Courses</a>
+                <a href="#contact" class="cta-button-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Menu -->
+    <section id="courses" class="section course-menu">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-badge">Our Courses</span>
+                <h2 class="section-title">Learning Modules</h2>
+                <p class="section-subtitle">Master cutting-edge technologies with our comprehensive curriculum designed by industry experts</p>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-item animate">
+                    <i class="fas fa-brain menu-icon"></i>
+                    <h3 class="menu-item-title">Machine Learning & AI</h3>
+                    <p class="menu-item-description">Advanced algorithms, neural networks, and practical AI applications</p>
+                    <a href="/ml.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-database menu-icon"></i>
+                    <h3 class="menu-item-title">Database Management</h3>
+                    <p class="menu-item-description">SQL, NoSQL, and enterprise data solutions</p>
+                    <a href="/dbms.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fab fa-python menu-icon"></i>
+                    <h3 class="menu-item-title">Python Programming</h3>
+                    <p class="menu-item-description">From basics to advanced Python development</p>
+                    <a href="/pythontut.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fab fa-microsoft menu-icon"></i>
+                    <h3 class="menu-item-title">Microsoft Azure</h3>
+                    <p class="menu-item-description">Cloud computing and Azure services</p>
+                    <a href="/Azure.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-microchip menu-icon"></i>
+                    <h3 class="menu-item-title">C Programming</h3>
+                    <p class="menu-item-description">System programming and memory management</p>
+                    <a href="/c.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-cube menu-icon"></i>
+                    <h3 class="menu-item-title">C++ Programming</h3>
+                    <p class="menu-item-description">Object-oriented programming and STL</p>
+                    <a href="/cpp.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-sitemap menu-icon"></i>
+                    <h3 class="menu-item-title">Data Structures & Algorithms</h3>
+                    <p class="menu-item-description">Essential concepts for efficient programming</p>
+                    <a href="/Dsa-Twss-ai.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="menu-item animate">
+                    <i class="fas fa-cloud-database menu-icon"></i>
+                    <h3 class="menu-item-title">NoSQL & Big Data</h3>
+                    <p class="menu-item-description">Modern database technologies and big data processing</p>
+                    <a href="/dbms1.html" class="menu-button">
+                        Explore <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item animate">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">COURSES</span>
+                </div>
+                <div class="stat-item animate">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">MODULES</span>
+                </div>
+                <div class="stat-item animate">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">HANDS-ON</span>
+                </div>
+                <div class="stat-item animate">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">SUPPORT</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-badge">About Us</span>
+                <h2 class="section-title">Why Choose TWSS</h2>
+            </div>
+
+            <div class="about-content animate">
+                <p class="about-text">
+                    TWSS (Technical Work for Software and Solutions) is a premier learning platform dedicated to providing high-quality technical education. Our courses are designed by industry experts with years of real-world experience, ensuring you learn practical skills that employers value.
+                </p>
+                <p class="about-text">
+                    We believe in hands-on learning, project-based education, and continuous support to help you achieve your career goals in the tech industry.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="feature-title">Expert-Led Content</h4>
+                    <p class="feature-description">Learn from industry professionals with years of experience</p>
+                </div>
+
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h4 class="feature-title">Hands-On Projects</h4>
+                    <p class="feature-description">Practical exercises and real-world projects</p>
+                </div>
+
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4 class="feature-title">Flexible Learning</h4>
+                    <p class="feature-description">Learn at your own pace, anytime, anywhere</p>
+                </div>
+
+                <div class="feature-item animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h4 class="feature-title">Certification</h4>
+                    <p class="feature-description">Earn certificates upon course completion</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-badge">Get in Touch</span>
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            </div>
+
+            <div class="contact-content animate">
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="from_name" required placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="from_email" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Enter subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Enter your message"></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn">Send Message</button>
+                    </form>
+                    <div id="success-message" style="display: none;">
+                        <i class="fas fa-check-circle"></i> Thank you for your message! We'll contact you soon.
+                    </div>
+                    <div id="error-message" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again later.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">TWSS</div>
+                <p class="footer-text">
+                    Technical Work for Software and Solutions
+                </p>
+                <p class="footer-text">
+                    Visit our main platform at <a href="https://twss.netlify.app" class="footer-link">twss.netlify.app</a>
+                </p>
+                <p class="footer-text">
+                    Building technical excellence through comprehensive education and practical experience.
+                </p>
+                <div class="footer-bottom">
+                    &copy; 2025 TWSS. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("3BMbctG8PLkgdT2XV");
+        })();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768) {
+                        navLinks.classList.remove('active');
+                        const icon = menuBtn.querySelector('i');
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
+                    }
+                }
+            });
+        });
+
+        // Scroll-based navbar background
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav-container');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.pageYOffset;
+
+            sections.forEach(section => {
+                const sectionHeight = section.offsetHeight;
+                const sectionTop = section.offsetTop - 100;
+                const sectionId = section.getAttribute('id');
+                const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    if (navLink) navLink.classList.add('active');
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg');
+            if (heroBg && scrollPosition < window.innerHeight) {
+                heroBg.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+            }
+        });
+
+        // Contact Form Submission
+        window.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.textContent = "Sending...";
+                submitBtn.disabled = true;
+
+                successMsg.style.display = 'none';
+                errorMsg.style.display = 'none';
+
+                // Send form using EmailJS
+                emailjs.sendForm('service_ood6pkb', 'template_ri7qwvd', form)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    form.reset();
+                    successMsg.style.display = 'block';
+                    setTimeout(() => successMsg.style.display = 'none', 5000);
+                })
+                .catch(function(error) {
+                    console.error('FAILED...', error);
+                    errorMsg.style.display = 'block';
+                })
+                .finally(function() {
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+            });
+        });
+
+        // Prevent right-click and developer tools
+        document.onkeydown = function(e) {
+            if (
+                e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S') ||
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i'))
+            ) {
+                return false;
+            }
+        };
+
+        document.addEventListener('contextmenu', event => {
+            event.preventDefault();
+        });
     </script>
 </body>
 </html>
