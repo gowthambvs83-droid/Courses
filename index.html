@@ -13,18 +13,15 @@
         }
 
         :root {
-            --primary-black: #0a0a0a;
+            --primary-black: #000000;
+            --dark-gray: #0a0a0a;
+            --card-bg: #111111;
             --primary-white: #ffffff;
-            --translucent-white: rgba(255, 255, 255, 0.08);
-            --translucent-black: rgba(0, 0, 0, 0.85);
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --accent-color: #d4d4d4;
-            --accent-hover: #ffffff;
+            --accent-white: #f5f5f5;
             --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --text-muted: #707070;
-            --card-hover: rgba(255, 255, 255, 0.08);
+            --text-secondary: #888888;
+            --border-color: #222222;
+            --hover-border: #444444;
         }
 
         body {
@@ -41,23 +38,23 @@
             padding: 0 20px;
         }
 
-        /* Navigation Menu */
+        /* Navigation */
         .nav-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 15px 40px;
+            padding: 20px 40px;
             z-index: 1000;
-            backdrop-filter: blur(20px);
-            background: var(--translucent-black);
-            border-bottom: 1px solid var(--glass-border);
+            background: rgba(0, 0, 0, 0.95);
+            border-bottom: 1px solid var(--border-color);
             transition: all 0.3s ease;
         }
 
         .nav-container.scrolled {
-            background: rgba(0, 0, 0, 0.95);
-            padding: 12px 40px;
+            padding: 15px 40px;
+            background: rgba(0, 0, 0, 0.98);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
         .nav-menu {
@@ -69,15 +66,15 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: 800;
             color: var(--text-primary);
-            letter-spacing: -0.5px;
+            letter-spacing: -2px;
         }
 
         .nav-links {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
 
         .nav-link {
@@ -85,18 +82,18 @@
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
-            padding: 10px 18px;
-            border-radius: 8px;
+            padding: 10px 20px;
+            border-radius: 6px;
             transition: all 0.3s ease;
         }
 
         .nav-link:hover,
         .nav-link.active {
             color: var(--text-primary);
-            background: var(--glass-bg);
+            background: var(--card-bg);
         }
 
-        /* Mobile Menu Button */
+        /* Mobile Menu */
         .menu-btn {
             display: none;
             background: none;
@@ -115,29 +112,9 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 120px 20px 80px;
+            padding: 140px 20px 100px;
+            background: var(--primary-black);
             position: relative;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
-            opacity: 0.15;
-            z-index: -1;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(10, 10, 10, 0.8) 50%, var(--primary-black) 100%);
-            z-index: -1;
         }
 
         .hero-content {
@@ -145,113 +122,90 @@
             z-index: 2;
         }
 
-        .hero-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 25px;
-            letter-spacing: 0.5px;
-        }
-
         .site-title {
-            font-size: 5rem;
-            font-weight: 800;
+            font-size: 6rem;
+            font-weight: 900;
             color: var(--text-primary);
-            margin-bottom: 15px;
-            letter-spacing: -3px;
-            line-height: 1.1;
+            margin-bottom: 10px;
+            letter-spacing: -4px;
+            line-height: 1;
         }
 
         .site-subtitle {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--text-secondary);
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             font-weight: 400;
-            letter-spacing: 0.5px;
-            max-width: 600px;
+            letter-spacing: -0.5px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 15px 40px;
+            padding: 16px 45px;
             background: var(--text-primary);
             border: none;
             color: var(--primary-black);
             text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
+            border-radius: 8px;
+            font-weight: 700;
             font-size: 1rem;
             transition: all 0.3s ease;
+            letter-spacing: -0.5px;
         }
 
         .cta-button:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+            background: var(--accent-white);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
         }
 
         .cta-button-secondary {
             display: inline-block;
-            padding: 15px 40px;
+            padding: 16px 45px;
             background: transparent;
-            border: 1px solid var(--glass-border);
+            border: 1px solid var(--border-color);
             color: var(--text-primary);
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s ease;
+            letter-spacing: -0.5px;
         }
 
         .cta-button-secondary:hover {
-            background: var(--glass-bg);
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
+            background: var(--card-bg);
+            border-color: var(--hover-border);
+            transform: translateY(-3px);
         }
 
         /* Section Styles */
         .section {
-            padding: 120px 0;
+            padding: 140px 0;
+            background: var(--primary-black);
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            margin-bottom: 80px;
         }
 
         .section-title {
-            font-size: 3rem;
-            font-weight: 700;
+            font-size: 3.5rem;
+            font-weight: 800;
             margin-bottom: 20px;
-            letter-spacing: -1px;
+            letter-spacing: -2px;
+            line-height: 1.1;
         }
 
         .section-subtitle {
@@ -262,25 +216,22 @@
             line-height: 1.8;
         }
 
-        /* Course Menu */
-        .course-menu {
-            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
-        }
-
+        /* Course Grid */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
         }
 
         .menu-item {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 35px 30px;
-            transition: all 0.4s ease;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 45px 35px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .menu-item::before {
@@ -289,8 +240,8 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), transparent);
+            height: 4px;
+            background: linear-gradient(90deg, #ffffff, rgba(255,255,255,0.1));
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -300,46 +251,57 @@
         }
 
         .menu-item:hover {
-            transform: translateY(-8px);
-            background: var(--card-hover);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            transform: translateY(-12px) scale(1.02);
+            background: #1a1a1a;
+            border-color: var(--hover-border);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .menu-item:active {
+            transform: translateY(-8px) scale(1.01);
         }
 
         .menu-icon {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
+            font-size: 3rem;
+            color: var(--text-primary);
+            margin-bottom: 25px;
             display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .menu-item:hover .menu-icon {
+            transform: scale(1.1);
         }
 
         .menu-item-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 12px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 15px;
             color: var(--text-primary);
+            letter-spacing: -0.5px;
         }
 
         .menu-item-description {
             color: var(--text-secondary);
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
         .menu-button {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
+            gap: 10px;
+            padding: 12px 28px;
             background: transparent;
-            border: 1px solid var(--glass-border);
+            border: 1px solid var(--border-color);
             color: var(--text-primary);
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 0.9rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
+            letter-spacing: -0.3px;
         }
 
         .menu-button:hover {
@@ -349,26 +311,26 @@
         }
 
         .menu-button i {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             transition: transform 0.3s ease;
         }
 
         .menu-button:hover i {
-            transform: translateX(3px);
+            transform: translateX(4px);
         }
 
         /* Stats Section */
         .stats-section {
-            padding: 80px 0;
-            background: var(--glass-bg);
-            border-top: 1px solid var(--glass-border);
-            border-bottom: 1px solid var(--glass-border);
+            padding: 100px 0;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            gap: 50px;
             text-align: center;
         }
 
@@ -377,83 +339,26 @@
         }
 
         .stat-number {
-            font-size: 4rem;
-            font-weight: 800;
+            font-size: 4.5rem;
+            font-weight: 900;
             color: var(--text-primary);
             display: block;
-            margin-bottom: 8px;
-            letter-spacing: -2px;
+            margin-bottom: 10px;
+            letter-spacing: -3px;
             line-height: 1;
         }
 
         .stat-label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            font-weight: 400;
-            letter-spacing: 1.5px;
+            font-weight: 500;
+            letter-spacing: 2px;
             text-transform: uppercase;
-        }
-
-        /* About Section */
-        .about-section {
-            background: linear-gradient(180deg, rgba(15, 15, 15, 1) 0%, var(--primary-black) 100%);
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-text {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.9;
-            margin-bottom: 30px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .feature-item {
-            text-align: center;
-            padding: 30px;
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 1.5rem;
-            color: var(--accent-color);
-        }
-
-        .feature-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-
-        .feature-description {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
         }
 
         /* Contact Section */
         .contact-section {
-            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
+            background: var(--dark-gray);
         }
 
         .contact-content {
@@ -462,31 +367,31 @@
         }
 
         .contact-form {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 50px;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: var(--text-primary);
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.95rem;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
+            padding: 16px 20px;
+            background: var(--primary-black);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             color: var(--text-primary);
             font-size: 1rem;
             font-family: inherit;
@@ -496,38 +401,39 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--accent-color);
-            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-secondary);
+            background: #0a0a0a;
         }
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 140px;
+            min-height: 150px;
         }
 
         #submit-btn {
             width: 100%;
-            padding: 15px 40px;
+            padding: 16px 45px;
             background: var(--text-primary);
             border: none;
             color: var(--primary-black);
             text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
+            border-radius: 8px;
+            font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            letter-spacing: -0.5px;
         }
 
         #submit-btn:hover {
-            background: var(--accent-hover);
+            background: var(--accent-white);
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
         }
 
         #submit-btn:disabled {
@@ -539,9 +445,9 @@
         #success-message,
         #error-message {
             text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 8px;
             font-weight: 500;
         }
 
@@ -559,9 +465,9 @@
 
         /* Footer */
         footer {
-            padding: 80px 0 40px;
+            padding: 100px 0 50px;
             text-align: center;
-            border-top: 1px solid var(--glass-border);
+            border-top: 1px solid var(--border-color);
             background: var(--primary-black);
         }
 
@@ -571,18 +477,18 @@
         }
 
         .footer-logo {
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
             color: var(--text-primary);
-            margin-bottom: 20px;
-            letter-spacing: -1px;
+            margin-bottom: 25px;
+            letter-spacing: -2px;
         }
 
         .footer-text {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.9;
+            margin-bottom: 20px;
         }
 
         .footer-link {
@@ -593,33 +499,22 @@
         }
 
         .footer-link:hover {
-            color: var(--accent-color);
+            color: var(--text-secondary);
         }
 
         .footer-bottom {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid var(--glass-border);
-            color: var(--text-muted);
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
             font-size: 0.85rem;
         }
 
         /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .animate {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
 
         .animate.visible {
@@ -644,13 +539,13 @@
                 right: 0;
                 background: rgba(0, 0, 0, 0.98);
                 flex-direction: column;
-                padding: 20px;
-                gap: 5px;
+                padding: 25px;
+                gap: 8px;
                 transform: translateY(-100%);
                 opacity: 0;
                 visibility: hidden;
                 transition: all 0.3s ease;
-                border-bottom: 1px solid var(--glass-border);
+                border-bottom: 1px solid var(--border-color);
             }
 
             .nav-links.active {
@@ -660,26 +555,26 @@
             }
 
             .nav-link {
-                padding: 12px 20px;
+                padding: 14px 20px;
                 text-align: center;
                 border-radius: 8px;
             }
 
             .hero {
-                padding: 100px 20px 60px;
+                padding: 120px 20px 80px;
             }
 
             .site-title {
-                font-size: 3rem;
-                letter-spacing: -2px;
+                font-size: 3.5rem;
+                letter-spacing: -3px;
             }
 
             .site-subtitle {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
 
             .section-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .menu-grid {
@@ -687,7 +582,7 @@
             }
 
             .contact-form {
-                padding: 30px 20px;
+                padding: 35px 25px;
             }
 
             .hero-buttons {
@@ -698,21 +593,26 @@
             .cta-button,
             .cta-button-secondary {
                 width: 100%;
-                max-width: 300px;
+                max-width: 320px;
             }
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .stat-number {
+                font-size: 3rem;
             }
         }
 
         @media (max-width: 480px) {
             .site-title {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
 
-            .stat-number {
-                font-size: 2.5rem;
+            .menu-item {
+                padding: 35px 25px;
             }
 
             .stats-grid {
@@ -740,101 +640,96 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-
         <div class="hero-content">
-            <div class="hero-badge">Premium Learning Platform</div>
             <h1 class="site-title">TWSS</h1>
-            <p class="site-subtitle">Technical Work for Software and Solutions. Master cutting-edge technologies with industry-expert designed courses.</p>
+            <p class="site-subtitle">Technical Work for Software and Solutions. Master cutting-edge technologies with expert-designed courses.</p>
             <div class="hero-buttons">
                 <a href="#courses" class="cta-button">Explore Courses</a>
-                <a href="#contact" class="cta-button-secondary">Get in Touch</a>
+                <a href="#contact" class="cta-button-secondary">Contact Us</a>
             </div>
         </div>
     </section>
 
-    <!-- Course Menu -->
-    <section id="courses" class="section course-menu">
+    <!-- Course Section -->
+    <section id="courses" class="section">
         <div class="container">
             <div class="section-header animate">
-                <span class="section-badge">Our Courses</span>
-                <h2 class="section-title">Learning Modules</h2>
+                <h2 class="section-title">Courses</h2>
                 <p class="section-subtitle">Master cutting-edge technologies with our comprehensive curriculum designed by industry experts</p>
             </div>
 
             <div class="menu-grid">
-                <div class="menu-item animate">
+                <a href="https://twss.netlify.app/ml.html" class="menu-item animate">
                     <i class="fas fa-brain menu-icon"></i>
                     <h3 class="menu-item-title">Machine Learning & AI</h3>
                     <p class="menu-item-description">Advanced algorithms, neural networks, and practical AI applications</p>
-                    <a href="/ml.html" class="menu-button">
+                    <span class="menu-button">
                         Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+                    </span>
+                </a>
 
-                <div class="menu-item animate">
+                <a href="https://twss.netlify.app/dbms.html" class="menu-item animate">
                     <i class="fas fa-database menu-icon"></i>
                     <h3 class="menu-item-title">Database Management</h3>
                     <p class="menu-item-description">SQL, NoSQL, and enterprise data solutions</p>
-                    <a href="/dbms.html" class="menu-button">
+                    <span class="menu-button">
                         Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+                    </span>
+                </a>
 
-                <div class="menu-item animate">
+                <a href="https://twss.netlify.app/pythontut.html" class="menu-item animate">
                     <i class="fab fa-python menu-icon"></i>
                     <h3 class="menu-item-title">Python Programming</h3>
                     <p class="menu-item-description">From basics to advanced Python development</p>
-                    <a href="/pythontut.html" class="menu-button">
+                    <span class="menu-button">
                         Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+                    </span>
+                </a>
 
-                <div class="menu-item animate">
+                <a href="https://twss.netlify.app/Azure.html" class="menu-item animate">
                     <i class="fab fa-microsoft menu-icon"></i>
                     <h3 class="menu-item-title">Microsoft Azure</h3>
                     <p class="menu-item-description">Cloud computing and Azure services</p>
-                    <a href="/Azure.html" class="menu-button">
+                    <span class="menu-button">
                         Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+                    </span>
+                </a>
 
-                <div class="menu-item animate">
+                <a href="https://twss.netlify.app/c.html" class="menu-item animate">
                     <i class="fas fa-microchip menu-icon"></i>
                     <h3 class="menu-item-title">C Programming</h3>
                     <p class="menu-item-description">System programming and memory management</p>
-                    <a href="/c.html" class="menu-button">
+                    <span class="menu-button">
                         Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+                    </span>
+                </a>
 
-                <div class="menu-item animate">
+                <a href="https://twss.netlify.app/cpp.html" class="menu-item animate">
                     <i class="fas fa-cube menu-icon"></i>
                     <h3 class="menu-item-title">C++ Programming</h3>
                     <p class="menu-item-description">Object-oriented programming and STL</p>
-                    <a href="/cpp.html" class="menu-button">
+                    <span class="menu-button">
                         Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+                    </span>
+                </a>
 
-                <div class="menu-item animate">
+                <a href="https://twss.netlify.app/Dsa-Twss-ai.html" class="menu-item animate">
                     <i class="fas fa-sitemap menu-icon"></i>
                     <h3 class="menu-item-title">Data Structures & Algorithms</h3>
                     <p class="menu-item-description">Essential concepts for efficient programming</p>
-                    <a href="/Dsa-Twss-ai.html" class="menu-button">
+                    <span class="menu-button">
                         Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+                    </span>
+                </a>
 
-                <div class="menu-item animate">
+                <a href="https://twss.netlify.app/dbms1.html" class="menu-item animate">
                     <i class="fas fa-cloud-database menu-icon"></i>
                     <h3 class="menu-item-title">NoSQL & Big Data</h3>
                     <p class="menu-item-description">Modern database technologies and big data processing</p>
-                    <a href="/dbms1.html" class="menu-button">
+                    <span class="menu-button">
                         Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+                    </span>
+                </a>
             </div>
         </div>
     </section>
@@ -864,54 +759,18 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section about-section">
+    <section id="about" class="section">
         <div class="container">
             <div class="section-header animate">
-                <span class="section-badge">About Us</span>
-                <h2 class="section-title">Why Choose TWSS</h2>
+                <h2 class="section-title">About TWSS</h2>
             </div>
-
-            <div class="about-content animate">
-                <p class="about-text">
+            <div class="contact-content animate">
+                <p class="footer-text">
                     TWSS (Technical Work for Software and Solutions) is a premier learning platform dedicated to providing high-quality technical education. Our courses are designed by industry experts with years of real-world experience, ensuring you learn practical skills that employers value.
                 </p>
-                <p class="about-text">
+                <p class="footer-text">
                     We believe in hands-on learning, project-based education, and continuous support to help you achieve your career goals in the tech industry.
                 </p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h4 class="feature-title">Expert-Led Content</h4>
-                    <p class="feature-description">Learn from industry professionals with years of experience</p>
-                </div>
-
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h4 class="feature-title">Hands-On Projects</h4>
-                    <p class="feature-description">Practical exercises and real-world projects</p>
-                </div>
-
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h4 class="feature-title">Flexible Learning</h4>
-                    <p class="feature-description">Learn at your own pace, anytime, anywhere</p>
-                </div>
-
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <h4 class="feature-title">Certification</h4>
-                    <p class="feature-description">Earn certificates upon course completion</p>
-                </div>
             </div>
         </div>
     </section>
@@ -920,8 +779,7 @@
     <section id="contact" class="section contact-section">
         <div class="container">
             <div class="section-header animate">
-                <span class="section-badge">Get in Touch</span>
-                <h2 class="section-title">Contact Us</h2>
+                <h2 class="section-title">Contact</h2>
                 <p class="section-subtitle">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
             </div>
 
@@ -972,7 +830,7 @@
                     Building technical excellence through comprehensive education and practical experience.
                 </p>
                 <div class="footer-bottom">
-                    &copy; 2025 TWSS. All rights reserved.
+                    © 2025 TWSS. All rights reserved.
                 </div>
             </div>
         </div>
@@ -1065,3402 +923,6 @@
 
         document.querySelectorAll('.animate').forEach(el => {
             observer.observe(el);
-        });
-
-        // Parallax effect for hero background
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.pageYOffset;
-            const heroBg = document.querySelector('.hero-bg');
-            if (heroBg && scrollPosition < window.innerHeight) {
-                heroBg.style.transform = `translateY(${scrollPosition * 0.3}px)`;
-            }
-        });
-
-        // Contact Form Submission
-        window.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('contact-form');
-            const submitBtn = document.getElementById('submit-btn');
-            const successMsg = document.getElementById('success-message');
-            const errorMsg = document.getElementById('error-message');
-
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const originalBtnText = submitBtn.textContent;
-                submitBtn.textContent = "Sending...";
-                submitBtn.disabled = true;
-
-                successMsg.style.display = 'none';
-                errorMsg.style.display = 'none';
-
-                // Send form using EmailJS
-                emailjs.sendForm('service_ood6pkb', 'template_ri7qwvd', form)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    form.reset();
-                    successMsg.style.display = 'block';
-                    setTimeout(() => successMsg.style.display = 'none', 5000);
-                })
-                .catch(function(error) {
-                    console.error('FAILED...', error);
-                    errorMsg.style.display = 'block';
-                })
-                .finally(function() {
-                    submitBtn.textContent = originalBtnText;
-                    submitBtn.disabled = false;
-                });
-            });
-        });
-
-        // Prevent right-click and developer tools
-        document.onkeydown = function(e) {
-            if (
-                e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S') ||
-                e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i'))
-            ) {
-                return false;
-            }
-        };
-
-        document.addEventListener('contextmenu', event => {
-            event.preventDefault();
-        });
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TWSS - Technical Work for Software and Solutions</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-black: #0a0a0a;
-            --primary-white: #ffffff;
-            --translucent-white: rgba(255, 255, 255, 0.08);
-            --translucent-black: rgba(0, 0, 0, 0.85);
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --accent-color: #d4d4d4;
-            --accent-hover: #ffffff;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --text-muted: #707070;
-            --card-hover: rgba(255, 255, 255, 0.08);
-        }
-
-        body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: var(--primary-black);
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Navigation Menu */
-        .nav-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px 40px;
-            z-index: 1000;
-            backdrop-filter: blur(20px);
-            background: var(--translucent-black);
-            border-bottom: 1px solid var(--glass-border);
-            transition: all 0.3s ease;
-        }
-
-        .nav-container.scrolled {
-            background: rgba(0, 0, 0, 0.95);
-            padding: 12px 40px;
-        }
-
-        .nav-menu {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 8px;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 10px 18px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--text-primary);
-            background: var(--glass-bg);
-        }
-
-        /* Mobile Menu Button */
-        .menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 120px 20px 80px;
-            position: relative;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
-            opacity: 0.15;
-            z-index: -1;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(10, 10, 10, 0.8) 50%, var(--primary-black) 100%);
-            z-index: -1;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            z-index: 2;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 25px;
-            letter-spacing: 0.5px;
-        }
-
-        .site-title {
-            font-size: 5rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-            letter-spacing: -3px;
-            line-height: 1.1;
-        }
-
-        .site-subtitle {
-            font-size: 1.4rem;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: var(--text-primary);
-            border: none;
-            color: var(--primary-black);
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
-        }
-
-        .cta-button-secondary {
-            display: inline-block;
-            padding: 15px 40px;
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button-secondary:hover {
-            background: var(--glass-bg);
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        /* Section Styles */
-        .section {
-            padding: 120px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .section-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        /* Course Menu */
-        .course-menu {
-            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-        }
-
-        .menu-item {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 35px 30px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .menu-item:hover::before {
-            opacity: 1;
-        }
-
-        .menu-item:hover {
-            transform: translateY(-8px);
-            background: var(--card-hover);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .menu-icon {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .menu-item-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-        }
-
-        .menu-item-description {
-            color: var(--text-secondary);
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .menu-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .menu-button:hover {
-            background: var(--text-primary);
-            color: var(--primary-black);
-            border-color: var(--text-primary);
-        }
-
-        .menu-button i {
-            font-size: 0.8rem;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-button:hover i {
-            transform: translateX(3px);
-        }
-
-        /* Stats Section */
-        .stats-section {
-            padding: 80px 0;
-            background: var(--glass-bg);
-            border-top: 1px solid var(--glass-border);
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            text-align: center;
-        }
-
-        .stat-item {
-            padding: 20px;
-        }
-
-        .stat-number {
-            font-size: 4rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            display: block;
-            margin-bottom: 8px;
-            letter-spacing: -2px;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        /* About Section */
-        .about-section {
-            background: linear-gradient(180deg, rgba(15, 15, 15, 1) 0%, var(--primary-black) 100%);
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-text {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.9;
-            margin-bottom: 30px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .feature-item {
-            text-align: center;
-            padding: 30px;
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 1.5rem;
-            color: var(--accent-color);
-        }
-
-        .feature-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-
-        .feature-description {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
-        }
-
-        .contact-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .contact-form {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 40px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--text-muted);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 140px;
-        }
-
-        #submit-btn {
-            width: 100%;
-            padding: 15px 40px;
-            background: var(--text-primary);
-            border: none;
-            color: var(--primary-black);
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        #submit-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
-        }
-
-        #submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        #success-message,
-        #error-message {
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: 500;
-        }
-
-        #success-message {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        #error-message {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            padding: 80px 0 40px;
-            text-align: center;
-            border-top: 1px solid var(--glass-border);
-            background: var(--primary-black);
-        }
-
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .footer-text {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        .footer-link {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--accent-color);
-        }
-
-        .footer-bottom {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid var(--glass-border);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .animate.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 15px 20px;
-            }
-
-            .menu-btn {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: rgba(0, 0, 0, 0.98);
-                flex-direction: column;
-                padding: 20px;
-                gap: 5px;
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-                border-bottom: 1px solid var(--glass-border);
-            }
-
-            .nav-links.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .nav-link {
-                padding: 12px 20px;
-                text-align: center;
-                border-radius: 8px;
-            }
-
-            .hero {
-                padding: 100px 20px 60px;
-            }
-
-            .site-title {
-                font-size: 3rem;
-                letter-spacing: -2px;
-            }
-
-            .site-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-form {
-                padding: 30px 20px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .cta-button,
-            .cta-button-secondary {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .site-title {
-                font-size: 2.2rem;
-            }
-
-            .stat-number {
-                font-size: 2.5rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="nav-container">
-        <div class="nav-menu">
-            <div class="logo">TWSS</div>
-            <button class="menu-btn" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="nav-links">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#courses" class="nav-link">Courses</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content">
-            <div class="hero-badge">Premium Learning Platform</div>
-            <h1 class="site-title">TWSS</h1>
-            <p class="site-subtitle">Technical Work for Software and Solutions. Master cutting-edge technologies with industry-expert designed courses.</p>
-            <div class="hero-buttons">
-                <a href="#courses" class="cta-button">Explore Courses</a>
-                <a href="#contact" class="cta-button-secondary">Get in Touch</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Course Menu -->
-    <section id="courses" class="section course-menu">
-        <div class="container">
-            <div class="section-header animate">
-                <span class="section-badge">Our Courses</span>
-                <h2 class="section-title">Learning Modules</h2>
-                <p class="section-subtitle">Master cutting-edge technologies with our comprehensive curriculum designed by industry experts</p>
-            </div>
-
-            <div class="menu-grid">
-                <div class="menu-item animate">
-                    <i class="fas fa-brain menu-icon"></i>
-                    <h3 class="menu-item-title">Machine Learning & AI</h3>
-                    <p class="menu-item-description">Advanced algorithms, neural networks, and practical AI applications</p>
-                    <a href="/ml.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-database menu-icon"></i>
-                    <h3 class="menu-item-title">Database Management</h3>
-                    <p class="menu-item-description">SQL, NoSQL, and enterprise data solutions</p>
-                    <a href="/dbms.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fab fa-python menu-icon"></i>
-                    <h3 class="menu-item-title">Python Programming</h3>
-                    <p class="menu-item-description">From basics to advanced Python development</p>
-                    <a href="/pythontut.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fab fa-microsoft menu-icon"></i>
-                    <h3 class="menu-item-title">Microsoft Azure</h3>
-                    <p class="menu-item-description">Cloud computing and Azure services</p>
-                    <a href="/Azure.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-microchip menu-icon"></i>
-                    <h3 class="menu-item-title">C Programming</h3>
-                    <p class="menu-item-description">System programming and memory management</p>
-                    <a href="/c.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-cube menu-icon"></i>
-                    <h3 class="menu-item-title">C++ Programming</h3>
-                    <p class="menu-item-description">Object-oriented programming and STL</p>
-                    <a href="/cpp.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-sitemap menu-icon"></i>
-                    <h3 class="menu-item-title">Data Structures & Algorithms</h3>
-                    <p class="menu-item-description">Essential concepts for efficient programming</p>
-                    <a href="/Dsa-Twss-ai.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-cloud-database menu-icon"></i>
-                    <h3 class="menu-item-title">NoSQL & Big Data</h3>
-                    <p class="menu-item-description">Modern database technologies and big data processing</p>
-                    <a href="/dbms1.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item animate">
-                    <span class="stat-number">8</span>
-                    <span class="stat-label">COURSES</span>
-                </div>
-                <div class="stat-item animate">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">MODULES</span>
-                </div>
-                <div class="stat-item animate">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">HANDS-ON</span>
-                </div>
-                <div class="stat-item animate">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">SUPPORT</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about-section">
-        <div class="container">
-            <div class="section-header animate">
-                <span class="section-badge">About Us</span>
-                <h2 class="section-title">Why Choose TWSS</h2>
-            </div>
-
-            <div class="about-content animate">
-                <p class="about-text">
-                    TWSS (Technical Work for Software and Solutions) is a premier learning platform dedicated to providing high-quality technical education. Our courses are designed by industry experts with years of real-world experience, ensuring you learn practical skills that employers value.
-                </p>
-                <p class="about-text">
-                    We believe in hands-on learning, project-based education, and continuous support to help you achieve your career goals in the tech industry.
-                </p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h4 class="feature-title">Expert-Led Content</h4>
-                    <p class="feature-description">Learn from industry professionals with years of experience</p>
-                </div>
-
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h4 class="feature-title">Hands-On Projects</h4>
-                    <p class="feature-description">Practical exercises and real-world projects</p>
-                </div>
-
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h4 class="feature-title">Flexible Learning</h4>
-                    <p class="feature-description">Learn at your own pace, anytime, anywhere</p>
-                </div>
-
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <h4 class="feature-title">Certification</h4>
-                    <p class="feature-description">Earn certificates upon course completion</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section contact-section">
-        <div class="container">
-            <div class="section-header animate">
-                <span class="section-badge">Get in Touch</span>
-                <h2 class="section-title">Contact Us</h2>
-                <p class="section-subtitle">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
-            </div>
-
-            <div class="contact-content animate">
-                <div class="contact-form">
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="from_name" required placeholder="Enter your name">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="from_email" required placeholder="Enter your email">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required placeholder="Enter subject">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Enter your message"></textarea>
-                        </div>
-                        <button type="submit" id="submit-btn">Send Message</button>
-                    </form>
-                    <div id="success-message" style="display: none;">
-                        <i class="fas fa-check-circle"></i> Thank you for your message! We'll contact you soon.
-                    </div>
-                    <div id="error-message" style="display: none;">
-                        <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again later.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">TWSS</div>
-                <p class="footer-text">
-                    Technical Work for Software and Solutions
-                </p>
-                <p class="footer-text">
-                    Visit our main platform at <a href="https://twss.netlify.app" class="footer-link">twss.netlify.app</a>
-                </p>
-                <p class="footer-text">
-                    Building technical excellence through comprehensive education and practical experience.
-                </p>
-                <div class="footer-bottom">
-                    &copy; 2025 TWSS. All rights reserved.
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-    <script>
-        // Initialize EmailJS
-        (function() {
-            emailjs.init("3BMbctG8PLkgdT2XV");
-        })();
-
-        // Mobile Menu Toggle
-        const menuBtn = document.querySelector('.menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            const icon = menuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-
-        // Smooth Scroll for Navigation Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-
-                    // Close mobile menu if open
-                    if (window.innerWidth <= 768) {
-                        navLinks.classList.remove('active');
-                        const icon = menuBtn.querySelector('i');
-                        icon.classList.add('fa-bars');
-                        icon.classList.remove('fa-times');
-                    }
-                }
-            });
-        });
-
-        // Scroll-based navbar background
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('.nav-container');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Active nav link on scroll
-        const sections = document.querySelectorAll('section[id]');
-        window.addEventListener('scroll', () => {
-            const scrollY = window.pageYOffset;
-
-            sections.forEach(section => {
-                const sectionHeight = section.offsetHeight;
-                const sectionTop = section.offsetTop - 100;
-                const sectionId = section.getAttribute('id');
-                const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    if (navLink) navLink.classList.add('active');
-                }
-            });
-        });
-
-        // Animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.animate').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Parallax effect for hero background
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.pageYOffset;
-            const heroBg = document.querySelector('.hero-bg');
-            if (heroBg && scrollPosition < window.innerHeight) {
-                heroBg.style.transform = `translateY(${scrollPosition * 0.3}px)`;
-            }
-        });
-
-        // Contact Form Submission
-        window.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('contact-form');
-            const submitBtn = document.getElementById('submit-btn');
-            const successMsg = document.getElementById('success-message');
-            const errorMsg = document.getElementById('error-message');
-
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const originalBtnText = submitBtn.textContent;
-                submitBtn.textContent = "Sending...";
-                submitBtn.disabled = true;
-
-                successMsg.style.display = 'none';
-                errorMsg.style.display = 'none';
-
-                // Send form using EmailJS
-                emailjs.sendForm('service_ood6pkb', 'template_ri7qwvd', form)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    form.reset();
-                    successMsg.style.display = 'block';
-                    setTimeout(() => successMsg.style.display = 'none', 5000);
-                })
-                .catch(function(error) {
-                    console.error('FAILED...', error);
-                    errorMsg.style.display = 'block';
-                })
-                .finally(function() {
-                    submitBtn.textContent = originalBtnText;
-                    submitBtn.disabled = false;
-                });
-            });
-        });
-
-        // Prevent right-click and developer tools
-        document.onkeydown = function(e) {
-            if (
-                e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S') ||
-                e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i'))
-            ) {
-                return false;
-            }
-        };
-
-        document.addEventListener('contextmenu', event => {
-            event.preventDefault();
-        });
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TWSS - Technical Work for Software and Solutions</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-black: #0a0a0a;
-            --primary-white: #ffffff;
-            --translucent-white: rgba(255, 255, 255, 0.08);
-            --translucent-black: rgba(0, 0, 0, 0.85);
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --accent-color: #d4d4d4;
-            --accent-hover: #ffffff;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --text-muted: #707070;
-            --card-hover: rgba(255, 255, 255, 0.08);
-        }
-
-        body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: var(--primary-black);
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Navigation Menu */
-        .nav-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px 40px;
-            z-index: 1000;
-            backdrop-filter: blur(20px);
-            background: var(--translucent-black);
-            border-bottom: 1px solid var(--glass-border);
-            transition: all 0.3s ease;
-        }
-
-        .nav-container.scrolled {
-            background: rgba(0, 0, 0, 0.95);
-            padding: 12px 40px;
-        }
-
-        .nav-menu {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 8px;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 10px 18px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--text-primary);
-            background: var(--glass-bg);
-        }
-
-        /* Mobile Menu Button */
-        .menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 120px 20px 80px;
-            position: relative;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
-            opacity: 0.15;
-            z-index: -1;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(10, 10, 10, 0.8) 50%, var(--primary-black) 100%);
-            z-index: -1;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            z-index: 2;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 25px;
-            letter-spacing: 0.5px;
-        }
-
-        .site-title {
-            font-size: 5rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-            letter-spacing: -3px;
-            line-height: 1.1;
-        }
-
-        .site-subtitle {
-            font-size: 1.4rem;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: var(--text-primary);
-            border: none;
-            color: var(--primary-black);
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
-        }
-
-        .cta-button-secondary {
-            display: inline-block;
-            padding: 15px 40px;
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button-secondary:hover {
-            background: var(--glass-bg);
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        /* Section Styles */
-        .section {
-            padding: 120px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .section-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        /* Course Menu */
-        .course-menu {
-            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-        }
-
-        .menu-item {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 35px 30px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .menu-item:hover::before {
-            opacity: 1;
-        }
-
-        .menu-item:hover {
-            transform: translateY(-8px);
-            background: var(--card-hover);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .menu-icon {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .menu-item-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-        }
-
-        .menu-item-description {
-            color: var(--text-secondary);
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .menu-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .menu-button:hover {
-            background: var(--text-primary);
-            color: var(--primary-black);
-            border-color: var(--text-primary);
-        }
-
-        .menu-button i {
-            font-size: 0.8rem;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-button:hover i {
-            transform: translateX(3px);
-        }
-
-        /* Stats Section */
-        .stats-section {
-            padding: 80px 0;
-            background: var(--glass-bg);
-            border-top: 1px solid var(--glass-border);
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            text-align: center;
-        }
-
-        .stat-item {
-            padding: 20px;
-        }
-
-        .stat-number {
-            font-size: 4rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            display: block;
-            margin-bottom: 8px;
-            letter-spacing: -2px;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        /* About Section */
-        .about-section {
-            background: linear-gradient(180deg, rgba(15, 15, 15, 1) 0%, var(--primary-black) 100%);
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-text {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.9;
-            margin-bottom: 30px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .feature-item {
-            text-align: center;
-            padding: 30px;
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 1.5rem;
-            color: var(--accent-color);
-        }
-
-        .feature-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-
-        .feature-description {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
-        }
-
-        .contact-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .contact-form {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 40px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--text-muted);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 140px;
-        }
-
-        #submit-btn {
-            width: 100%;
-            padding: 15px 40px;
-            background: var(--text-primary);
-            border: none;
-            color: var(--primary-black);
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        #submit-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
-        }
-
-        #submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        #success-message,
-        #error-message {
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: 500;
-        }
-
-        #success-message {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        #error-message {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            padding: 80px 0 40px;
-            text-align: center;
-            border-top: 1px solid var(--glass-border);
-            background: var(--primary-black);
-        }
-
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .footer-text {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        .footer-link {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--accent-color);
-        }
-
-        .footer-bottom {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid var(--glass-border);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .animate.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 15px 20px;
-            }
-
-            .menu-btn {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: rgba(0, 0, 0, 0.98);
-                flex-direction: column;
-                padding: 20px;
-                gap: 5px;
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-                border-bottom: 1px solid var(--glass-border);
-            }
-
-            .nav-links.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .nav-link {
-                padding: 12px 20px;
-                text-align: center;
-                border-radius: 8px;
-            }
-
-            .hero {
-                padding: 100px 20px 60px;
-            }
-
-            .site-title {
-                font-size: 3rem;
-                letter-spacing: -2px;
-            }
-
-            .site-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-form {
-                padding: 30px 20px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .cta-button,
-            .cta-button-secondary {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .site-title {
-                font-size: 2.2rem;
-            }
-
-            .stat-number {
-                font-size: 2.5rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="nav-container">
-        <div class="nav-menu">
-            <div class="logo">TWSS</div>
-            <button class="menu-btn" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="nav-links">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#courses" class="nav-link">Courses</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content">
-            <div class="hero-badge">Premium Learning Platform</div>
-            <h1 class="site-title">TWSS</h1>
-            <p class="site-subtitle">Technical Work for Software and Solutions. Master cutting-edge technologies with industry-expert designed courses.</p>
-            <div class="hero-buttons">
-                <a href="#courses" class="cta-button">Explore Courses</a>
-                <a href="#contact" class="cta-button-secondary">Get in Touch</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Course Menu -->
-    <section id="courses" class="section course-menu">
-        <div class="container">
-            <div class="section-header animate">
-                <span class="section-badge">Our Courses</span>
-                <h2 class="section-title">Learning Modules</h2>
-                <p class="section-subtitle">Master cutting-edge technologies with our comprehensive curriculum designed by industry experts</p>
-            </div>
-
-            <div class="menu-grid">
-                <div class="menu-item animate">
-                    <i class="fas fa-brain menu-icon"></i>
-                    <h3 class="menu-item-title">Machine Learning & AI</h3>
-                    <p class="menu-item-description">Advanced algorithms, neural networks, and practical AI applications</p>
-                    <a href="/ml.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-database menu-icon"></i>
-                    <h3 class="menu-item-title">Database Management</h3>
-                    <p class="menu-item-description">SQL, NoSQL, and enterprise data solutions</p>
-                    <a href="/dbms.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fab fa-python menu-icon"></i>
-                    <h3 class="menu-item-title">Python Programming</h3>
-                    <p class="menu-item-description">From basics to advanced Python development</p>
-                    <a href="/pythontut.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fab fa-microsoft menu-icon"></i>
-                    <h3 class="menu-item-title">Microsoft Azure</h3>
-                    <p class="menu-item-description">Cloud computing and Azure services</p>
-                    <a href="/Azure.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-microchip menu-icon"></i>
-                    <h3 class="menu-item-title">C Programming</h3>
-                    <p class="menu-item-description">System programming and memory management</p>
-                    <a href="/c.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-cube menu-icon"></i>
-                    <h3 class="menu-item-title">C++ Programming</h3>
-                    <p class="menu-item-description">Object-oriented programming and STL</p>
-                    <a href="/cpp.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-sitemap menu-icon"></i>
-                    <h3 class="menu-item-title">Data Structures & Algorithms</h3>
-                    <p class="menu-item-description">Essential concepts for efficient programming</p>
-                    <a href="/Dsa-Twss-ai.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-cloud-database menu-icon"></i>
-                    <h3 class="menu-item-title">NoSQL & Big Data</h3>
-                    <p class="menu-item-description">Modern database technologies and big data processing</p>
-                    <a href="/dbms1.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item animate">
-                    <span class="stat-number">8</span>
-                    <span class="stat-label">COURSES</span>
-                </div>
-                <div class="stat-item animate">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">MODULES</span>
-                </div>
-                <div class="stat-item animate">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">HANDS-ON</span>
-                </div>
-                <div class="stat-item animate">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">SUPPORT</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about-section">
-        <div class="container">
-            <div class="section-header animate">
-                <span class="section-badge">About Us</span>
-                <h2 class="section-title">Why Choose TWSS</h2>
-            </div>
-
-            <div class="about-content animate">
-                <p class="about-text">
-                    TWSS (Technical Work for Software and Solutions) is a premier learning platform dedicated to providing high-quality technical education. Our courses are designed by industry experts with years of real-world experience, ensuring you learn practical skills that employers value.
-                </p>
-                <p class="about-text">
-                    We believe in hands-on learning, project-based education, and continuous support to help you achieve your career goals in the tech industry.
-                </p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h4 class="feature-title">Expert-Led Content</h4>
-                    <p class="feature-description">Learn from industry professionals with years of experience</p>
-                </div>
-
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h4 class="feature-title">Hands-On Projects</h4>
-                    <p class="feature-description">Practical exercises and real-world projects</p>
-                </div>
-
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h4 class="feature-title">Flexible Learning</h4>
-                    <p class="feature-description">Learn at your own pace, anytime, anywhere</p>
-                </div>
-
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <h4 class="feature-title">Certification</h4>
-                    <p class="feature-description">Earn certificates upon course completion</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section contact-section">
-        <div class="container">
-            <div class="section-header animate">
-                <span class="section-badge">Get in Touch</span>
-                <h2 class="section-title">Contact Us</h2>
-                <p class="section-subtitle">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
-            </div>
-
-            <div class="contact-content animate">
-                <div class="contact-form">
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="from_name" required placeholder="Enter your name">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="from_email" required placeholder="Enter your email">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required placeholder="Enter subject">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Enter your message"></textarea>
-                        </div>
-                        <button type="submit" id="submit-btn">Send Message</button>
-                    </form>
-                    <div id="success-message" style="display: none;">
-                        <i class="fas fa-check-circle"></i> Thank you for your message! We'll contact you soon.
-                    </div>
-                    <div id="error-message" style="display: none;">
-                        <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again later.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">TWSS</div>
-                <p class="footer-text">
-                    Technical Work for Software and Solutions
-                </p>
-                <p class="footer-text">
-                    Visit our main platform at <a href="https://twss.netlify.app" class="footer-link">twss.netlify.app</a>
-                </p>
-                <p class="footer-text">
-                    Building technical excellence through comprehensive education and practical experience.
-                </p>
-                <div class="footer-bottom">
-                    &copy; 2025 TWSS. All rights reserved.
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-    <script>
-        // Initialize EmailJS
-        (function() {
-            emailjs.init("3BMbctG8PLkgdT2XV");
-        })();
-
-        // Mobile Menu Toggle
-        const menuBtn = document.querySelector('.menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            const icon = menuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-
-        // Smooth Scroll for Navigation Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-
-                    // Close mobile menu if open
-                    if (window.innerWidth <= 768) {
-                        navLinks.classList.remove('active');
-                        const icon = menuBtn.querySelector('i');
-                        icon.classList.add('fa-bars');
-                        icon.classList.remove('fa-times');
-                    }
-                }
-            });
-        });
-
-        // Scroll-based navbar background
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('.nav-container');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Active nav link on scroll
-        const sections = document.querySelectorAll('section[id]');
-        window.addEventListener('scroll', () => {
-            const scrollY = window.pageYOffset;
-
-            sections.forEach(section => {
-                const sectionHeight = section.offsetHeight;
-                const sectionTop = section.offsetTop - 100;
-                const sectionId = section.getAttribute('id');
-                const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    if (navLink) navLink.classList.add('active');
-                }
-            });
-        });
-
-        // Animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.animate').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Parallax effect for hero background
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.pageYOffset;
-            const heroBg = document.querySelector('.hero-bg');
-            if (heroBg && scrollPosition < window.innerHeight) {
-                heroBg.style.transform = `translateY(${scrollPosition * 0.3}px)`;
-            }
-        });
-
-        // Contact Form Submission
-        window.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('contact-form');
-            const submitBtn = document.getElementById('submit-btn');
-            const successMsg = document.getElementById('success-message');
-            const errorMsg = document.getElementById('error-message');
-
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const originalBtnText = submitBtn.textContent;
-                submitBtn.textContent = "Sending...";
-                submitBtn.disabled = true;
-
-                successMsg.style.display = 'none';
-                errorMsg.style.display = 'none';
-
-                // Send form using EmailJS
-                emailjs.sendForm('service_ood6pkb', 'template_ri7qwvd', form)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    form.reset();
-                    successMsg.style.display = 'block';
-                    setTimeout(() => successMsg.style.display = 'none', 5000);
-                })
-                .catch(function(error) {
-                    console.error('FAILED...', error);
-                    errorMsg.style.display = 'block';
-                })
-                .finally(function() {
-                    submitBtn.textContent = originalBtnText;
-                    submitBtn.disabled = false;
-                });
-            });
-        });
-
-        // Prevent right-click and developer tools
-        document.onkeydown = function(e) {
-            if (
-                e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S') ||
-                e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i'))
-            ) {
-                return false;
-            }
-        };
-
-        document.addEventListener('contextmenu', event => {
-            event.preventDefault();
-        });
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TWSS - Technical Work for Software and Solutions</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-black: #0a0a0a;
-            --primary-white: #ffffff;
-            --translucent-white: rgba(255, 255, 255, 0.08);
-            --translucent-black: rgba(0, 0, 0, 0.85);
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --accent-color: #d4d4d4;
-            --accent-hover: #ffffff;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --text-muted: #707070;
-            --card-hover: rgba(255, 255, 255, 0.08);
-        }
-
-        body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: var(--primary-black);
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Navigation Menu */
-        .nav-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px 40px;
-            z-index: 1000;
-            backdrop-filter: blur(20px);
-            background: var(--translucent-black);
-            border-bottom: 1px solid var(--glass-border);
-            transition: all 0.3s ease;
-        }
-
-        .nav-container.scrolled {
-            background: rgba(0, 0, 0, 0.95);
-            padding: 12px 40px;
-        }
-
-        .nav-menu {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 8px;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 10px 18px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--text-primary);
-            background: var(--glass-bg);
-        }
-
-        /* Mobile Menu Button */
-        .menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 120px 20px 80px;
-            position: relative;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
-            opacity: 0.15;
-            z-index: -1;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(10, 10, 10, 0.8) 50%, var(--primary-black) 100%);
-            z-index: -1;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            z-index: 2;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 25px;
-            letter-spacing: 0.5px;
-        }
-
-        .site-title {
-            font-size: 5rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-            letter-spacing: -3px;
-            line-height: 1.1;
-        }
-
-        .site-subtitle {
-            font-size: 1.4rem;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: var(--text-primary);
-            border: none;
-            color: var(--primary-black);
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
-        }
-
-        .cta-button-secondary {
-            display: inline-block;
-            padding: 15px 40px;
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button-secondary:hover {
-            background: var(--glass-bg);
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        /* Section Styles */
-        .section {
-            padding: 120px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .section-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        /* Course Menu */
-        .course-menu {
-            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-        }
-
-        .menu-item {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 35px 30px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .menu-item:hover::before {
-            opacity: 1;
-        }
-
-        .menu-item:hover {
-            transform: translateY(-8px);
-            background: var(--card-hover);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .menu-icon {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .menu-item-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-        }
-
-        .menu-item-description {
-            color: var(--text-secondary);
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .menu-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .menu-button:hover {
-            background: var(--text-primary);
-            color: var(--primary-black);
-            border-color: var(--text-primary);
-        }
-
-        .menu-button i {
-            font-size: 0.8rem;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-button:hover i {
-            transform: translateX(3px);
-        }
-
-        /* Stats Section */
-        .stats-section {
-            padding: 80px 0;
-            background: var(--glass-bg);
-            border-top: 1px solid var(--glass-border);
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            text-align: center;
-        }
-
-        .stat-item {
-            padding: 20px;
-        }
-
-        .stat-number {
-            font-size: 4rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            display: block;
-            margin-bottom: 8px;
-            letter-spacing: -2px;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        /* About Section */
-        .about-section {
-            background: linear-gradient(180deg, rgba(15, 15, 15, 1) 0%, var(--primary-black) 100%);
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-text {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.9;
-            margin-bottom: 30px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .feature-item {
-            text-align: center;
-            padding: 30px;
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 1.5rem;
-            color: var(--accent-color);
-        }
-
-        .feature-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-
-        .feature-description {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(15, 15, 15, 1) 100%);
-        }
-
-        .contact-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .contact-form {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 40px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--text-muted);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 140px;
-        }
-
-        #submit-btn {
-            width: 100%;
-            padding: 15px 40px;
-            background: var(--text-primary);
-            border: none;
-            color: var(--primary-black);
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        #submit-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
-        }
-
-        #submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        #success-message,
-        #error-message {
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: 500;
-        }
-
-        #success-message {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        #error-message {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            padding: 80px 0 40px;
-            text-align: center;
-            border-top: 1px solid var(--glass-border);
-            background: var(--primary-black);
-        }
-
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .footer-text {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        .footer-link {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--accent-color);
-        }
-
-        .footer-bottom {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid var(--glass-border);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .animate.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 15px 20px;
-            }
-
-            .menu-btn {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: rgba(0, 0, 0, 0.98);
-                flex-direction: column;
-                padding: 20px;
-                gap: 5px;
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-                border-bottom: 1px solid var(--glass-border);
-            }
-
-            .nav-links.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .nav-link {
-                padding: 12px 20px;
-                text-align: center;
-                border-radius: 8px;
-            }
-
-            .hero {
-                padding: 100px 20px 60px;
-            }
-
-            .site-title {
-                font-size: 3rem;
-                letter-spacing: -2px;
-            }
-
-            .site-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-form {
-                padding: 30px 20px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .cta-button,
-            .cta-button-secondary {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .site-title {
-                font-size: 2.2rem;
-            }
-
-            .stat-number {
-                font-size: 2.5rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="nav-container">
-        <div class="nav-menu">
-            <div class="logo">TWSS</div>
-            <button class="menu-btn" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="nav-links">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#courses" class="nav-link">Courses</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content">
-            <div class="hero-badge">Premium Learning Platform</div>
-            <h1 class="site-title">TWSS</h1>
-            <p class="site-subtitle">Technical Work for Software and Solutions. Master cutting-edge technologies with industry-expert designed courses.</p>
-            <div class="hero-buttons">
-                <a href="#courses" class="cta-button">Explore Courses</a>
-                <a href="#contact" class="cta-button-secondary">Get in Touch</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Course Menu -->
-    <section id="courses" class="section course-menu">
-        <div class="container">
-            <div class="section-header animate">
-                <span class="section-badge">Our Courses</span>
-                <h2 class="section-title">Learning Modules</h2>
-                <p class="section-subtitle">Master cutting-edge technologies with our comprehensive curriculum designed by industry experts</p>
-            </div>
-
-            <div class="menu-grid">
-                <div class="menu-item animate">
-                    <i class="fas fa-brain menu-icon"></i>
-                    <h3 class="menu-item-title">Machine Learning & AI</h3>
-                    <p class="menu-item-description">Advanced algorithms, neural networks, and practical AI applications</p>
-                    <a href="/ml.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-database menu-icon"></i>
-                    <h3 class="menu-item-title">Database Management</h3>
-                    <p class="menu-item-description">SQL, NoSQL, and enterprise data solutions</p>
-                    <a href="/dbms.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fab fa-python menu-icon"></i>
-                    <h3 class="menu-item-title">Python Programming</h3>
-                    <p class="menu-item-description">From basics to advanced Python development</p>
-                    <a href="/pythontut.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fab fa-microsoft menu-icon"></i>
-                    <h3 class="menu-item-title">Microsoft Azure</h3>
-                    <p class="menu-item-description">Cloud computing and Azure services</p>
-                    <a href="/Azure.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-microchip menu-icon"></i>
-                    <h3 class="menu-item-title">C Programming</h3>
-                    <p class="menu-item-description">System programming and memory management</p>
-                    <a href="/c.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-cube menu-icon"></i>
-                    <h3 class="menu-item-title">C++ Programming</h3>
-                    <p class="menu-item-description">Object-oriented programming and STL</p>
-                    <a href="/cpp.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-sitemap menu-icon"></i>
-                    <h3 class="menu-item-title">Data Structures & Algorithms</h3>
-                    <p class="menu-item-description">Essential concepts for efficient programming</p>
-                    <a href="/Dsa-Twss-ai.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="menu-item animate">
-                    <i class="fas fa-cloud-database menu-icon"></i>
-                    <h3 class="menu-item-title">NoSQL & Big Data</h3>
-                    <p class="menu-item-description">Modern database technologies and big data processing</p>
-                    <a href="/dbms1.html" class="menu-button">
-                        Explore <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item animate">
-                    <span class="stat-number">8</span>
-                    <span class="stat-label">COURSES</span>
-                </div>
-                <div class="stat-item animate">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">MODULES</span>
-                </div>
-                <div class="stat-item animate">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">HANDS-ON</span>
-                </div>
-                <div class="stat-item animate">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">SUPPORT</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about-section">
-        <div class="container">
-            <div class="section-header animate">
-                <span class="section-badge">About Us</span>
-                <h2 class="section-title">Why Choose TWSS</h2>
-            </div>
-
-            <div class="about-content animate">
-                <p class="about-text">
-                    TWSS (Technical Work for Software and Solutions) is a premier learning platform dedicated to providing high-quality technical education. Our courses are designed by industry experts with years of real-world experience, ensuring you learn practical skills that employers value.
-                </p>
-                <p class="about-text">
-                    We believe in hands-on learning, project-based education, and continuous support to help you achieve your career goals in the tech industry.
-                </p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h4 class="feature-title">Expert-Led Content</h4>
-                    <p class="feature-description">Learn from industry professionals with years of experience</p>
-                </div>
-
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h4 class="feature-title">Hands-On Projects</h4>
-                    <p class="feature-description">Practical exercises and real-world projects</p>
-                </div>
-
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h4 class="feature-title">Flexible Learning</h4>
-                    <p class="feature-description">Learn at your own pace, anytime, anywhere</p>
-                </div>
-
-                <div class="feature-item animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <h4 class="feature-title">Certification</h4>
-                    <p class="feature-description">Earn certificates upon course completion</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section contact-section">
-        <div class="container">
-            <div class="section-header animate">
-                <span class="section-badge">Get in Touch</span>
-                <h2 class="section-title">Contact Us</h2>
-                <p class="section-subtitle">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
-            </div>
-
-            <div class="contact-content animate">
-                <div class="contact-form">
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="from_name" required placeholder="Enter your name">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="from_email" required placeholder="Enter your email">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required placeholder="Enter subject">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Enter your message"></textarea>
-                        </div>
-                        <button type="submit" id="submit-btn">Send Message</button>
-                    </form>
-                    <div id="success-message" style="display: none;">
-                        <i class="fas fa-check-circle"></i> Thank you for your message! We'll contact you soon.
-                    </div>
-                    <div id="error-message" style="display: none;">
-                        <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again later.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">TWSS</div>
-                <p class="footer-text">
-                    Technical Work for Software and Solutions
-                </p>
-                <p class="footer-text">
-                    Visit our main platform at <a href="https://twss.netlify.app" class="footer-link">twss.netlify.app</a>
-                </p>
-                <p class="footer-text">
-                    Building technical excellence through comprehensive education and practical experience.
-                </p>
-                <div class="footer-bottom">
-                    &copy; 2025 TWSS. All rights reserved.
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-    <script>
-        // Initialize EmailJS
-        (function() {
-            emailjs.init("3BMbctG8PLkgdT2XV");
-        })();
-
-        // Mobile Menu Toggle
-        const menuBtn = document.querySelector('.menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            const icon = menuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-
-        // Smooth Scroll for Navigation Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-
-                    // Close mobile menu if open
-                    if (window.innerWidth <= 768) {
-                        navLinks.classList.remove('active');
-                        const icon = menuBtn.querySelector('i');
-                        icon.classList.add('fa-bars');
-                        icon.classList.remove('fa-times');
-                    }
-                }
-            });
-        });
-
-        // Scroll-based navbar background
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('.nav-container');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Active nav link on scroll
-        const sections = document.querySelectorAll('section[id]');
-        window.addEventListener('scroll', () => {
-            const scrollY = window.pageYOffset;
-
-            sections.forEach(section => {
-                const sectionHeight = section.offsetHeight;
-                const sectionTop = section.offsetTop - 100;
-                const sectionId = section.getAttribute('id');
-                const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    if (navLink) navLink.classList.add('active');
-                }
-            });
-        });
-
-        // Animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.animate').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Parallax effect for hero background
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.pageYOffset;
-            const heroBg = document.querySelector('.hero-bg');
-            if (heroBg && scrollPosition < window.innerHeight) {
-                heroBg.style.transform = `translateY(${scrollPosition * 0.3}px)`;
-            }
         });
 
         // Contact Form Submission
